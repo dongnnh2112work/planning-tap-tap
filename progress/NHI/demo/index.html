@@ -1,0 +1,2639 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <title>Choo Zoo · Thảo Cầm Viên</title>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("fonts/BeVietnamPro-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("fonts/BeVietnamPro-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("fonts/BeVietnamPro-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("fonts/BeVietnamPro-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("fonts/BeVietnamPro-ExtraBold.ttf") format("truetype"); font-weight: 800; font-style: normal; font-display: swap; }
+    :root {
+      --color-bg: #F1F0EC;
+      --color-card: #FFFFFF;
+      --color-text: #1C1B19;
+      --color-text-muted: #4A4640;
+      --color-accent: #E0B034;
+      --color-accent-text: #1C1B19;
+      --color-peach: #F0D5CC;
+      --color-lilac: #E0D4EE;
+      --color-sage: #D3DEC4;
+      --color-butter: #E8C75A;
+      --color-taupe: #D2C8BA;
+      --color-brown: #7A5340;
+      --color-olive: #6B7F45;
+      --color-stone: #9A9186;
+      --color-success: #4F7A52;
+      --color-warning: #C4922A;
+      --color-error: #B25A4A;
+      --color-line: #E4E0DA;
+      --color-track: #F3F1ED;
+      --color-map-land: #C5D4B6;
+      --color-map-water: #B7C9CE;
+      --color-map-path: #E6D4B4;
+      --color-you: #E8C4B4;
+      --color-route: #5A7EA8;
+      --color-route-dim: #C8C3BA;
+      --color-dot: #3F72B0;
+      --font-sans: "Be Vietnam Pro", sans-serif;
+      --fs-display: 80px;
+      --fw-display: 800;
+      --lh-display: 1.00;
+      --fs-greeting: 26px;
+      --fw-greeting: 800;
+      --lh-greeting: 1.15;
+      --fs-heading: 20px;
+      --fw-heading: 800;
+      --lh-heading: 1.20;
+      --fs-title: 16px;
+      --fw-title: 700;
+      --lh-title: 1.25;
+      --fs-body: 14px;
+      --fw-body: 400;
+      --lh-body: 1.45;
+      --fs-label: 12px;
+      --fw-label: 600;
+      --lh-label: 1.30;
+      --fs-caption: 12px;
+      --fw-caption: 400;
+      --lh-caption: 1.35;
+      --fs-button: 16px;
+      --fw-button: 600;
+      --lh-button: 1.20;
+      --radius-xs: 8px;
+      --radius-sm: 16px;
+      --radius-md: 24px;
+      --radius-lg: 28px;
+      --radius-xl: 40px;
+      --radius-pill: 999px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --shadow-card: 0 8px 24px rgba(28, 27, 25, 0.06);
+      --shadow-soft: 0 2px 8px rgba(28, 27, 25, 0.04);
+      --screen-inset: 20px;
+      --cta-height: 54px;
+      --icon-button: 36px;
+      --avatar: 48px;
+      --dur: 240ms;
+      --ease: cubic-bezier(.22, .61, .36, 1);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+    html, body, button, input, select, textarea {
+      font-family: var(--font-sans);
+    }
+    svg, svg text { font-family: var(--font-sans); }
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      background: #D8D5CF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+    }
+    .device {
+      width: 390px;
+      height: 844px;
+      background: var(--color-bg);
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 30px 70px rgba(28, 27, 25, .22);
+    }
+    @media (max-width: 430px) {
+      body { background: var(--color-bg); }
+      .device { width: 100vw; height: 100dvh; height: 100vh; border-radius: 0; box-shadow: none; }
+    }
+    .statusbar {
+      height: 48px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 22px 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .statusbar .sigs { display: flex; gap: 6px; align-items: center; font-size: 12px; }
+    .bar { width: 17px; height: 10px; border: 1.5px solid var(--color-text); border-radius: 3px; position: relative; }
+    .bar::after { content: ""; position: absolute; inset: 2px 6px 2px 2px; background: var(--color-text); border-radius: 1px; }
+    #app {
+      height: calc(100% - 48px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    }
+    #app.is-leaving { opacity: 0; transform: translate3d(0, 14px, 0); }
+    .screen { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 4px 16px 8px; min-height: 48px; flex: 0 0 auto;
+    }
+    .topbar h2 { font-size: 16px; font-weight: 700; letter-spacing: -.02em; }
+    .icon-btn {
+      width: var(--icon-button); height: var(--icon-button); border-radius: var(--radius-pill);
+      border: none; background: var(--color-card); color: var(--color-text);
+      display: grid; place-items: center; cursor: pointer;
+      box-shadow: var(--shadow-soft); font-weight: 700; font-size: 15px;
+      transition: transform 140ms var(--ease);
+    }
+    .icon-btn.ghost { background: transparent; box-shadow: none; }
+    .pad { padding: 4px var(--screen-inset) 28px; overflow: auto; flex: 1; min-height: 0; -webkit-overflow-scrolling: touch; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: var(--fs-greeting); font-weight: var(--fw-greeting); letter-spacing: -.03em; line-height: var(--lh-greeting); }
+    .muted { color: var(--color-text-muted); }
+    .tiny { font-size: var(--fs-caption); color: var(--color-text-muted); line-height: var(--lh-caption); }
+    .lead { font-size: 15px; line-height: 1.45; color: var(--color-text-muted); }
+    label { display: block; font-size: var(--fs-label); font-weight: var(--fw-label); margin: 0 0 6px; }
+    input[type=email], input[type=text], select {
+      width: 100%; height: 52px; border-radius: var(--radius-sm);
+      border: 1.5px solid var(--color-line); background: var(--color-card);
+      padding: 0 16px; font: 500 16px/1.2 var(--font-sans); color: var(--color-text); outline: none;
+    }
+    select {
+      padding-right: 32px;
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5 L6 6.5 L11 1.5' fill='none' stroke='%231C1B19' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    input:focus, select:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(224, 176, 52, .28); }
+    .dob-row { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 8px; }
+    .field { margin-bottom: 14px; }
+    .btn, .goal, .station, .choice, .icon-btn, .chip-btn, .hcard {
+      transition: transform 140ms var(--ease), filter 140ms var(--ease), background 160ms var(--ease);
+    }
+    .btn:active, .goal:active, .station:active, .choice:active, .icon-btn:active, .chip-btn:active, .hcard:active {
+      transform: scale(0.97);
+    }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; min-height: var(--cta-height); border-radius: var(--radius-pill);
+      border: none; font: var(--fw-button) var(--fs-button)/var(--lh-button) var(--font-sans);
+      cursor: pointer; color: var(--color-accent-text); background: var(--color-accent);
+      box-shadow: var(--shadow-soft);
+    }
+    .btn[disabled] { opacity: .4; pointer-events: none; }
+    [hidden] { display: none !important; }
+    .btn.ghost { background: var(--color-card); color: var(--color-text); box-shadow: none; border: 1.5px solid var(--color-line); }
+    .btn.sm { min-height: 44px; font-size: 14px; }
+    .card {
+      background: var(--color-card); border-radius: var(--radius-lg);
+      padding: 16px 20px; box-shadow: var(--shadow-card);
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      border-radius: var(--radius-pill); padding: 4px 10px;
+      font-size: var(--fs-label); font-weight: var(--fw-label);
+      background: var(--color-track); color: var(--color-text);
+    }
+    .chip.peach { background: var(--color-peach); }
+    .chip.lilac { background: var(--color-lilac); }
+    .chip.sage { background: var(--color-sage); }
+    .chip.butter { background: var(--color-butter); }
+    .chip.taupe { background: var(--color-taupe); }
+    .chip-row { display: flex; gap: 8px; overflow: auto; padding: 2px 0 4px; scrollbar-width: none; }
+    .chip-row::-webkit-scrollbar { display: none; }
+    .chip-btn {
+      flex: 0 0 36px; width: 36px; height: 36px; border-radius: 50%;
+      border: none; background: var(--color-track); color: var(--color-text);
+      font: 700 12px var(--font-sans); cursor: pointer;
+    }
+    .chip-btn.on { background: var(--color-accent); }
+    .goal-row { display: flex; gap: 10px; overflow: auto; padding: 4px 0 14px; scrollbar-width: none; }
+    .goal-row::-webkit-scrollbar { display: none; }
+    .goal {
+      flex: 0 0 148px; text-align: left; cursor: pointer;
+      background: var(--color-peach); border: 2px solid transparent;
+      border-radius: var(--radius-md); padding: 14px; color: inherit; min-height: 132px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .goal:nth-child(5n+2) { background: var(--color-butter); }
+    .goal:nth-child(5n+3) { background: var(--color-lilac); }
+    .goal:nth-child(5n+4) { background: var(--color-sage); }
+    .goal:nth-child(5n+5) { background: var(--color-taupe); }
+    .goal-row .goal.on { background: var(--color-accent); border-color: var(--color-text); }
+    .goal b { font-size: 15px; font-weight: 800; letter-spacing: -.02em; display: block; }
+    .goal span { font-size: 12px; color: var(--color-text-muted); display: block; margin-top: 6px; }
+    .goal em { font-style: normal; font-size: 11px; font-weight: 700; margin-top: 10px; display: inline-flex; background: rgba(255,255,255,.7); border-radius: var(--radius-pill); padding: 3px 8px; width: max-content; }
+    .station {
+      display: grid; grid-template-columns: 44px 1fr 28px; gap: 12px; align-items: center;
+      background: var(--color-card); border: none; border-radius: var(--radius-md);
+      padding: 10px 12px; margin-bottom: 8px; cursor: pointer; text-align: left; width: 100%; color: inherit;
+      box-shadow: var(--shadow-soft);
+    }
+    .station .ico {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: grid; place-items: center; background: var(--color-sage);
+    }
+    .station.break .ico { background: var(--color-lilac); }
+    .station h3 { font-size: var(--fs-title); font-weight: var(--fw-title); letter-spacing: -.01em; }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .pill {
+      font-size: 11px; font-weight: 600; border-radius: var(--radius-pill);
+      padding: 2px 8px; background: var(--color-track);
+    }
+    .check {
+      width: 24px; height: 24px; border-radius: 50%; background: var(--color-track);
+      display: grid; place-items: center; font-size: 13px;
+    }
+    .station.on .check { background: var(--color-accent); color: var(--color-accent-text); }
+    .sticky {
+      position: sticky; bottom: 0; padding: 10px var(--screen-inset) 16px;
+      background: linear-gradient(transparent, var(--color-bg) 28%);
+      flex: 0 0 auto;
+    }
+    .hero-pair { display: grid; grid-template-columns: 1fr 64px; gap: 10px; margin: 14px 0 16px; min-height: 168px; }
+    .hero-main {
+      background: var(--color-butter); border-radius: var(--radius-lg); padding: 18px 16px;
+      position: relative; overflow: hidden; box-shadow: var(--shadow-card);
+    }
+    .hero-main h3 { font-size: 18px; font-weight: 800; letter-spacing: -.03em; margin-bottom: 6px; }
+    .hero-side {
+      background: var(--color-taupe); border-radius: var(--radius-lg);
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      display: grid; place-items: center; font-weight: 800; font-size: 13px;
+      letter-spacing: .08em; cursor: pointer; border: none; color: inherit;
+    }
+    .hscroll { display: flex; gap: 10px; overflow: auto; padding: 2px 0 8px; scrollbar-width: none; }
+    .hscroll::-webkit-scrollbar { display: none; }
+    .hcard {
+      flex: 0 0 168px; border: none; border-radius: var(--radius-md); padding: 14px;
+      text-align: left; cursor: pointer; color: inherit; min-height: 118px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .hcard b { font-size: 15px; font-weight: 800; }
+    .hcard span { font-size: 12px; color: var(--color-text-muted); margin-top: 8px; }
+    .bnav {
+      display: grid; grid-template-columns: 1fr 1fr 64px 1fr 1fr;
+      align-items: end; padding: 6px 10px 12px; background: var(--color-card);
+      box-shadow: 0 -4px 20px rgba(28,27,25,.04);
+    }
+    .bnav button {
+      border: none; background: none; color: var(--color-text-muted);
+      font: 600 10px var(--font-sans); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .bnav button.on { color: var(--color-text); }
+    .bnav .plus {
+      width: 52px; height: 52px; border-radius: 50%; background: var(--color-accent); color: var(--color-accent-text);
+      font-size: 28px; font-weight: 600; margin-top: -18px; box-shadow: var(--shadow-card);
+      display: grid; place-items: center;
+    }
+    .mapbox { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+    .map-card { margin: 0 20px; border-radius: var(--radius-lg); overflow: hidden; background: var(--color-map-water); height: 280px; box-shadow: var(--shadow-card); }
+    .map-card svg, .map-fit svg { width: 100%; height: 100%; display: block; }
+    .map-fit { flex: 1; min-height: 0; }
+    .nav-screen { flex: 1; min-height: 0; display: flex; flex-direction: column; position: relative; }
+    .map-viewport { flex: 1; min-height: 0; position: relative; overflow: hidden; background: var(--color-map-water); }
+    .map-viewport svg { width: 100%; height: 100%; display: block; touch-action: none; }
+    .nav-banner {
+      position: absolute; top: 56px; left: 16px; right: 16px; z-index: 4;
+      background: var(--color-card); border-radius: var(--radius-md);
+      padding: 12px 14px; box-shadow: var(--shadow-card);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .nav-banner .turn {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--color-route); color: #fff;
+      display: grid; place-items: center; flex: 0 0 36px; font-size: 16px;
+    }
+    .nav-banner p { font-size: 14px; font-weight: 700; letter-spacing: -.01em; line-height: 1.3; }
+    .nav-top-abs { position: absolute; top: 8px; left: 12px; right: 12px; z-index: 5; padding: 0; background: transparent; }
+    .nav-sheet {
+      background: var(--color-card); border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 16px 20px 18px; box-shadow: 0 -8px 28px rgba(28,27,25,.06); flex: 0 0 auto;
+    }
+    .nav-sheet h2 { font-size: 22px; font-weight: 800; letter-spacing: -.03em; margin: 4px 0 6px; }
+    .recenter {
+      position: absolute; right: 16px; bottom: 16px; z-index: 3;
+      width: 44px; height: 44px; border-radius: 50%; border: none;
+      background: var(--color-card); box-shadow: var(--shadow-card); cursor: pointer; color: var(--color-text);
+    }
+    .overlay {
+      position: absolute; inset: 0; background: rgba(28, 27, 25, .28);
+      z-index: 8; display: flex; align-items: flex-end; justify-content: center; padding: 16px;
+    }
+    .overlay.center { align-items: center; }
+    .modal {
+      width: 100%; background: var(--color-card); border-radius: var(--radius-lg);
+      padding: 22px 20px; box-shadow: var(--shadow-card);
+    }
+    .howto { padding-left: 18px; margin: 8px 0 14px; font-size: 14px; }
+    .howto li { margin: 0 0 6px; line-height: 1.4; }
+    .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+    .choices.stack { grid-template-columns: 1fr; }
+    .choice {
+      min-height: 72px; border-radius: var(--radius-md); border: 2px solid transparent;
+      background: var(--color-card); font: 700 16px var(--font-sans); color: var(--color-text);
+      cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+      box-shadow: var(--shadow-soft);
+    }
+    .choices.stack .choice { min-height: 56px; flex-direction: row; justify-content: flex-start; padding: 0 16px; }
+    .choice:nth-child(1) { background: var(--color-lilac); }
+    .choice:nth-child(2) { background: var(--color-sage); }
+    .choice:nth-child(3) { background: var(--color-peach); }
+    .choice:nth-child(4) { background: var(--color-taupe); }
+    .choice.ok { border-color: var(--color-success); box-shadow: 0 0 0 2px rgba(79,122,82,.25); }
+    .choice.bad { border-color: var(--color-error); }
+    .timer { height: 8px; border-radius: var(--radius-pill); background: var(--color-track); overflow: hidden; margin: 12px 0 4px; }
+    .timer > i { display: block; height: 100%; width: 100%; background: var(--color-accent); border-radius: inherit; transform-origin: left center; }
+    .viewfinder {
+      position: relative; aspect-ratio: 3/4; max-height: 340px; margin: 12px auto;
+      width: 100%; border-radius: var(--radius-lg); overflow: hidden; background: var(--color-taupe);
+    }
+    .viewfinder img { width: 100%; height: 100%; object-fit: cover; }
+    .ph { width: 100%; height: 100%; display: grid; place-items: center; color: var(--color-text-muted); text-align: center; padding: 20px; }
+    .frame-orn { pointer-events: none; position: absolute; inset: 12px; border: 2px dashed rgba(28,27,25,.28); border-radius: 20px; }
+    .viewfinder.zen .frame-orn { box-shadow: inset 0 0 0 8px rgba(224, 212, 238, .45); }
+    .viewfinder.vintage { background: #cfc3a4; }
+    .viewfinder.vintage::before, .viewfinder.vintage::after {
+      content: ""; position: absolute; top: 0; bottom: 0; width: 16px;
+      background: repeating-linear-gradient(#1C1B19 0 8px, transparent 8px 16px);
+      opacity: .7; z-index: 2;
+    }
+    .viewfinder.vintage::before { left: 0; }
+    .viewfinder.vintage::after { right: 0; }
+    .frame-cap {
+      position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 3;
+      background: var(--color-card); border-radius: var(--radius-pill);
+      padding: 6px 10px; font-size: 12px; font-weight: 700; text-align: center;
+    }
+    .seg { display: flex; gap: 6px; margin: 10px 0; }
+    .seg button {
+      flex: 1; height: 40px; border-radius: var(--radius-pill); border: none;
+      background: var(--color-card); font: 600 13px var(--font-sans); color: var(--color-text);
+      cursor: pointer; box-shadow: var(--shadow-soft);
+    }
+    .seg button.on { background: var(--color-accent); }
+    .hidden-file { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+    .idol-stage { perspective: 900px; margin: 16px 0; }
+    .idol-card { position: relative; height: 280px; }
+    .idol-inner { position: relative; width: 100%; height: 100%; transition: transform 560ms var(--ease); transform-style: preserve-3d; }
+    .idol-card.open .idol-inner { transform: rotateY(180deg); }
+    .idol-face {
+      position: absolute; inset: 0; border-radius: var(--radius-lg); padding: 20px;
+      backface-visibility: hidden; box-shadow: var(--shadow-card);
+      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+    }
+    .idol-front { background: var(--color-butter); }
+    .idol-back { background: var(--color-card); transform: rotateY(180deg); align-items: flex-start; text-align: left; }
+    .finale { flex: 1; display: flex; flex-direction: column; position: relative; overflow: auto; }
+    .finale-card {
+      margin: auto 20px; background: var(--color-card); border-radius: var(--radius-lg);
+      padding: 28px 22px; box-shadow: var(--shadow-card); text-align: center;
+      animation: pop-in 420ms var(--ease) both;
+    }
+    .finale-card.wide { text-align: left; }
+    @keyframes pop-in {
+      from { opacity: 0; transform: translateY(18px) scale(.96); }
+      to { opacity: 1; transform: none; }
+    }
+    .confetti { pointer-events: none; position: absolute; inset: 0; overflow: hidden; }
+    .confetti i {
+      position: absolute; top: -12px; width: 8px; height: 11px; border-radius: 2px;
+      animation: fall 2.8s var(--ease) forwards;
+    }
+    @keyframes fall { to { transform: translateY(640px) rotate(200deg); opacity: 0; } }
+    .display { font-size: 72px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+    .title-pill {
+      display: inline-block; margin: 12px 0 4px; padding: 8px 14px;
+      background: var(--color-lilac); border-radius: var(--radius-pill);
+      font-weight: 800; font-size: 18px;
+    }
+    .bars { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; height: 168px; margin: 16px 0 8px; }
+    .bars .col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; }
+    .bars .track {
+      flex: 1; width: 28px; background: var(--color-track); border-radius: var(--radius-pill);
+      display: flex; align-items: flex-end; overflow: hidden;
+    }
+    .bars .fill { width: 100%; border-radius: var(--radius-pill); }
+    .bars label { font-size: 11px; font-weight: 600; margin-top: 8px; text-align: center; }
+    .timeline { list-style: none; padding: 0; margin: 12px 0 0; }
+    .timeline li { display: grid; grid-template-columns: 36px 1fr; gap: 10px; margin: 0 0 12px; align-items: center; }
+    .timeline .dot { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--color-sage); }
+    #toast {
+      position: absolute; left: 20px; right: 20px; top: 58px;
+      background: var(--color-text); color: #fff; border-radius: 14px;
+      padding: 12px 14px; font-size: 14px; z-index: 20; display: none;
+    }
+    .avatar {
+      width: var(--avatar); height: var(--avatar); border-radius: 50%;
+      background: var(--color-peach); display: grid; place-items: center; overflow: hidden;
+    }
+    .greet { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .countbar { display: flex; justify-content: space-between; align-items: baseline; margin: 2px 0 8px; }
+    .minimap { height: 150px; border-radius: var(--radius-md); overflow: hidden; background: var(--color-map-water); }
+    .minimap svg { width: 100%; height: 100%; }
+    .secret {
+      margin-top: 14px; background: var(--color-butter); border-radius: var(--radius-md);
+      padding: 12px; display: grid; grid-template-columns: 52px 1fr; gap: 10px; align-items: center;
+    }
+    .share-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .share-actions .btn {
+      min-height: 52px;
+      font-size: 12.5px;
+      line-height: 1.2;
+      padding: 8px 8px;
+      text-align: center;
+    }
+    .share-actions .btn svg {
+      width: 16px; height: 16px; flex-shrink: 0;
+    }
+    .overlay.sheet { padding: 0; }
+    .share-sheet {
+      width: 100%;
+      background: var(--color-bg);
+      border-radius: 28px 28px 0 0;
+      border-top: 1px solid var(--color-line);
+      padding: 12px 18px 28px;
+      box-shadow: 0 -16px 40px rgba(28, 27, 25, 0.12);
+      animation: sheetUp .34s var(--ease) both;
+    }
+    @keyframes sheetUp {
+      from { transform: translateY(28px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .share-sheet .grab {
+      width: 44px; height: 5px; border-radius: 99px;
+      background: var(--color-line); margin: 4px auto 14px;
+    }
+    .share-sheet h3 { font-size: 18px; font-weight: 700; margin: 0 0 4px; text-align: center; }
+    .share-sheet p.muted { text-align: center; margin: 0 0 16px; font-size: 13px; }
+    .share-opt {
+      display: flex; align-items: center; gap: 14px; width: 100%;
+      border: 0; background: var(--color-card); border-radius: 18px;
+      padding: 12px 14px; margin-bottom: 10px;
+      font: inherit; color: inherit; text-align: left; cursor: pointer;
+      box-shadow: var(--shadow-soft);
+    }
+    .share-opt:active { transform: scale(0.99); }
+    .share-opt .glyph {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: grid; place-items: center; background: #F7E4EA; flex-shrink: 0;
+    }
+    .share-opt .glyph.save { background: var(--color-sage); }
+    .share-opt .glyph svg { width: 22px; height: 22px; }
+    .share-opt strong { display: block; font-size: 15px; }
+    .share-opt em {
+      display: block; font-style: normal; font-size: 12px;
+      color: var(--color-text-muted); margin-top: 2px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #app, .btn, .goal, .station, .choice, .icon-btn, .idol-inner, .finale-card, .confetti i, .share-sheet {
+        transition: none !important; animation: none !important;
+      }
+      #app.is-leaving { opacity: 1; transform: none; }
+    }
+  </style>
+  <link rel="stylesheet" href="../../choozoo-styleframes/frame4/tokens.css" />
+</head>
+<body>
+  <div class="device">
+    <div class="statusbar">
+      <span id="clock">21:44</span>
+      <div class="sigs"><span>5G</span><span class="bar"></span></div>
+    </div>
+    <div id="app"></div>
+    <div id="toast"></div>
+  </div>
+  <script>
+const KEY = "choozoo-proto-v2";
+const M_PER_UNIT = 1.35;
+const ARRIVE = 16;
+const WALK_SPEED = 52;
+const $ = (s, el=document) => el.querySelector(s);
+const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
+}
+function toast(msg) {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.style.display = "block";
+  clearTimeout(toast._id);
+  toast._id = setTimeout(() => t.style.display = "none", 2400);
+}
+function nowClock() {
+  const d = new Date();
+  $("#clock").textContent = d.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Saigon" });
+}
+nowClock();
+setInterval(nowClock, 15000);
+
+const ICO = {
+  gate: `<path d="M8 42V16h6l2-8h16l2 8h6v26H8z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M20 42V26h8v16" fill="none" stroke="currentColor" stroke-width="2.4"/>`,
+  temple: `<path d="M8 42V22l16-12 16 12v20H8z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M22 42V30h4v12" fill="none" stroke="currentColor" stroke-width="2.4"/>`,
+  wall: `<rect x="8" y="14" width="32" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16 14v24M24 14v24M32 14v24" stroke="currentColor" stroke-width="2"/>`,
+  orchid: `<circle cx="24" cy="22" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M24 27c-8 2-12 10-12 14h24c0-4-4-12-12-14M24 17V10" fill="none" stroke="currentColor" stroke-width="2.2"/>`,
+  frog: `<ellipse cx="24" cy="28" rx="14" ry="10" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="16" cy="18" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="32" cy="18" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="16" cy="18" r="1.6"/><circle cx="32" cy="18" r="1.6"/>`,
+  flamingo: `<path d="M18 42c0-10 4-16 10-18 6-2 8-8 6-12-4 2-8 1-8-2 8 0 14 6 12 14-2 8-10 10-12 18" fill="none" stroke="currentColor" stroke-width="2.3"/>`,
+  giraffe: `<path d="M16 44v-16l4-18 6-4 2 6-4 16h6l6 16" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="27" cy="8" r="1.6"/>`,
+  orang: `<circle cx="24" cy="22" r="12" fill="none" stroke="currentColor" stroke-width="2.3"/><ellipse cx="24" cy="26" rx="7" ry="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 42c2-8 6-12 10-12s8 4 10 12" fill="none" stroke="currentColor" stroke-width="2.2"/>`,
+  tiger: `<path d="M10 30c2-10 8-16 14-16s12 6 14 16c0 8-6 12-14 12S10 38 10 30z" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M16 16l-4-6M32 16l4-6M20 28h8M22 34h4" stroke="currentColor" stroke-width="2"/>`,
+  elephant: `<path d="M10 32c0-10 8-16 16-14 6 2 12 8 12 16v8H28c0-4-2-8-6-8s-6 4-6 8H10v-2z" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M12 36c-4 2-6 8-2 10" fill="none" stroke="currentColor" stroke-width="2.2"/>`,
+  hippo: `<ellipse cx="24" cy="28" rx="16" ry="10" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M12 22c0-6 6-10 12-8M36 26c2-6-2-10-6-10" fill="none" stroke="currentColor" stroke-width="2.2"/>`,
+  rhino: `<path d="M8 32c2-10 10-16 20-14 8 2 12 8 12 14 0 8-8 12-18 12S8 38 8 32z" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M26 16l8-8" stroke="currentColor" stroke-width="2.4"/>`,
+  bear: `<circle cx="24" cy="26" r="12" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="14" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="34" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="2"/>`,
+  monkey: `<circle cx="24" cy="20" r="10" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M14 42c2-10 6-14 10-14s8 4 10 14M10 22c-4 6-4 14 2 14" fill="none" stroke="currentColor" stroke-width="2.2"/>`,
+  croc: `<path d="M6 28c8-8 16-8 24-4 6 2 10 2 12 0-2 8-10 12-22 12S8 34 6 28z" fill="none" stroke="currentColor" stroke-width="2.3"/>`,
+  lion: `<circle cx="24" cy="24" r="10" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/>`,
+  zebra: `<path d="M10 36c2-12 8-20 16-20 10 0 14 10 14 18 0 6-4 10-10 10H18c-6 0-8-2-8-8z" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M18 20v16M24 18v18M30 22v14" stroke="currentColor" stroke-width="1.8"/>`,
+  douc: `<circle cx="24" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M16 42c2-10 5-14 8-14s6 4 8 14M12 18l-6-4M36 18l6-4" fill="none" stroke="currentColor" stroke-width="2.2"/>`,
+  leopard: `<ellipse cx="26" cy="28" rx="14" ry="9" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="14" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="20" cy="26" r="1.2"/><circle cx="28" cy="30" r="1.2"/><circle cx="32" cy="24" r="1.2"/>`,
+  ostrich: `<path d="M20 44V22c0-8 4-16 10-18 2 6-2 10-4 12 8 2 12 10 8 18H20z" fill="none" stroke="currentColor" stroke-width="2.3"/>`,
+  deer: `<path d="M14 42c2-12 6-18 12-18s8 6 10 18" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M20 16l-6-8M28 16l6-8M22 16l-2-10M26 16l2-10" stroke="currentColor" stroke-width="2"/>`,
+};
+
+const M4_ANIMAL = [
+  { id: "ngu", t: "Ngủ" },
+  { id: "an", t: "Ăn" },
+  { id: "choi", t: "Chơi" },
+  { id: "tron", t: "Trốn mất rồi" },
+];
+
+const MISSION_NAME = {
+  M1: "Tìm thấy em",
+  M2: "Đoán nhanh",
+  M3: "Bắt chước",
+  M4: "Quan sát",
+  M5: "Hồ sơ idol",
+};
+
+const STATIONS = [
+  { id:"b1", kind:"break", name:"Cổng chính", short:"Cổng", icon:"gate", mission:"M4", far:0, x:200, y:472,
+    hint:"02 Nguyễn Bỉnh Khiêm",
+    prompt:"Nhìn quanh cổng chính, không khí lúc này thế nào?",
+    choices:[
+      {id:"dong", t:"Đông vui"}, {id:"yen", t:"Yên ắng"},
+      {id:"nang", t:"Nắng đẹp"}, {id:"diu", t:"Trời dịu"},
+    ]},
+  { id:"b12", kind:"break", name:"Đền thờ Vua Hùng", short:"Đền Hùng", icon:"temple", mission:"M1", far:0, x:162, y:428,
+    hint:"Gần cổng chính",
+    prompt:"Tìm một họa tiết trên mái đền, rồi chụp lại.",
+    photoHint:"Gợi ý: họa tiết rồng, lá, hoặc góc mái cong." },
+  { id:"b6", kind:"break", name:"Nhà lan", short:"Nhà lan", icon:"orchid", mission:"M1", far:0, x:232, y:392,
+    hint:"Gần bảo tàng Động – Thực vật",
+    prompt:"Tìm loài lan theo gợi ý, rồi chụp một tấm.",
+    photoHint:"Gợi ý hôm nay: cánh trắng, họng vàng." },
+  { id:"b7", kind:"break", name:"Tường vàng tiểu Hội An", short:"Tường vàng", icon:"wall", mission:"M3", far:0, x:258, y:412,
+    hint:"Phía ngoài Bảo tàng Động – Thực vật",
+    prompt:"Tạo dáng với frame vintage kiểu ảnh phim.",
+    frame:"vintage" },
+  { id:"b2", kind:"break", name:"Tượng ếch ngồi thiền", short:"Ếch thiền", icon:"frog", mission:"M3", far:0, x:278, y:368,
+    hint:"Góc hồ sen, tag ở khu xếp hàng",
+    prompt:"Tạo dáng thiền cùng tượng ếch. Nhớ đứng cách tượng vài mét.",
+    frame:"zen" },
+  { id:"b10", kind:"break", name:"Vườn hồng hạc", short:"Hồng hạc", icon:"flamingo", mission:"M4", far:0, x:176, y:286,
+    hint:"Cạnh công và hồ thiên nga",
+    prompt:"Quan sát vườn hồng hạc. Công đang làm gì?",
+    choices:[
+      {id:"xoe", t:"Đang xòe đuôi"}, {id:"chan", t:"Đứng một chân"},
+      {id:"an", t:"Đang ăn"}, {id:"tron", t:"Trốn mất rồi"},
+    ]},
+  { id:"b3", kind:"break", name:"Tượng hươu cao cổ", short:"Tượng HCC", icon:"giraffe", mission:"M3", far:1, x:252, y:128,
+    hint:"Gần khu hươu cao cổ, cách tượng vài mét",
+    prompt:"Tạo dáng như hươu cao cổ. Chụp mà không chạm tượng.",
+    frame:"default" },
+  { id:"duoiuoi", kind:"animal", name:"Đười ươi", short:"Đười ươi", icon:"orang", mission:"M1", far:0, x:286, y:272,
+    hint:"Khu linh trưởng, gần hồ sen",
+    prompt:"Tìm Em Trò trong chuồng và chụp một tấm.",
+    photoHint:"Nếu Em Trò đang trèo cao, cứ chụp từ dưới lên." },
+  { id:"khi", kind:"animal", name:"Khỉ", short:"Khỉ", icon:"monkey", mission:"M2", far:0, x:218, y:248,
+    hint:"Khu linh trưởng giữa vườn",
+    prompt:"Đoán nhanh về khỉ",
+    quiz:{ q:"Khỉ chuyển từ cành này sang cành khác nhờ vào gì?",
+      answers:[
+        {id:"a", t:"Tay và đuôi", ok:true},
+        {id:"b", t:"Đôi cánh", ok:false},
+        {id:"c", t:"Chiếc vòi", ok:false},
+      ]}},
+  { id:"vooc", kind:"animal", name:"Voọc chà vá", short:"Voọc", icon:"douc", mission:"M5", far:0, x:248, y:232,
+    hint:"Khu linh trưởng",
+    prompt:"Chạm để mở hồ sơ idol của voọc",
+    idol:{ name:"Nắng", species:"Voọc chà vá chân nâu", dob:"12.03.2018",
+      fact:"Chân đỏ nâu và mặt viền trắng, như đang diện đồ lễ hội mỗi ngày." } },
+  { id:"voi", kind:"animal", name:"Voi", short:"Voi", icon:"elephant", mission:"M2", far:1, x:214, y:98,
+    hint:"Dọc sông Thị Nghè",
+    prompt:"Đoán nhanh về voi",
+    quiz:{ q:"Voi lấy thức ăn chủ yếu bằng gì?",
+      answers:[
+        {id:"a", t:"Chiếc vòi", ok:true},
+        {id:"b", t:"Đôi sừng", ok:false},
+        {id:"c", t:"Đôi cánh", ok:false},
+      ]}},
+  { id:"hcc", kind:"animal", name:"Hươu cao cổ", short:"Hươu cao cổ", icon:"giraffe", mission:"M2", far:1, x:270, y:90,
+    hint:"Dọc sông Thị Nghè, cạnh nhà voi",
+    prompt:"Đoán nhanh về hươu cao cổ",
+    quiz:{ q:"Hươu cao cổ thích ăn gì nhất?",
+      answers:[
+        {id:"a", t:"Lá trên những cành cao", ok:true},
+        {id:"b", t:"Cá dưới hồ", ok:false},
+        {id:"c", t:"Mật ong", ok:false},
+      ]}},
+  { id:"hama", kind:"animal", name:"Hà mã", short:"Hà mã", icon:"hippo", mission:"M3", far:1, x:304, y:158,
+    hint:"Hồ phía đông, gần khu vui chơi",
+    prompt:"Tạo dáng giống chú hà mã",
+    frame:"default" },
+  { id:"tegiac", kind:"animal", name:"Tê giác", short:"Tê giác", icon:"rhino", mission:"M5", far:1, x:96, y:312,
+    hint:"Khu châu Phi, gần cổng Nguyễn Thị Minh Khai",
+    prompt:"Chạm để mở hồ sơ idol của tê giác",
+    idol:{ name:"Sừng", species:"Tê giác trắng", dob:"03.11.2014",
+      fact:"Da dày như giáp, thích tắm bùn để tránh nắng và côn trùng." } },
+  { id:"nguavan", kind:"animal", name:"Ngựa vằn", short:"Ngựa vằn", icon:"zebra", mission:"M4", far:1, x:110, y:354,
+    hint:"Khu châu Phi",
+    prompt:"Ngựa vằn đang làm gì?" },
+  { id:"bao", kind:"animal", name:"Báo hoa mai", short:"Báo", icon:"leopard", mission:"M5", far:1, x:80, y:176,
+    hint:"Gần ao phía cổng Nguyễn Thị Minh Khai",
+    prompt:"Chạm để mở hồ sơ idol của báo",
+    idol:{ name:"Lốm", species:"Báo hoa mai", dob:"21.07.2016",
+      fact:"Mỗi cá thể có hoa văn riêng, không con nào giống con nào." } },
+  { id:"huounai", kind:"animal", name:"Hươu nai", short:"Hươu nai", icon:"deer", mission:"M4", far:1, x:118, y:74,
+    hint:"Cầu gỗ phía sông Thị Nghè",
+    prompt:"Hươu nai đang làm gì?" },
+  { id:"gau", kind:"animal", name:"Gấu", short:"Gấu", icon:"bear", mission:"M4", far:0, x:308, y:292,
+    hint:"Gần khu thú ăn thịt",
+    prompt:"Gấu đang làm gì?" },
+  { id:"sutu", kind:"animal", name:"Sư tử", short:"Sư tử", icon:"lion", mission:"M2", far:1, x:322, y:248,
+    hint:"Sát đường Nguyễn Hữu Cảnh",
+    prompt:"Đoán nhanh về sư tử",
+    quiz:{ q:"Sư tử sống theo nhóm gọi là gì?",
+      answers:[
+        {id:"a", t:"Bầy", ok:true},
+        {id:"b", t:"Đàn kiến", ok:false},
+        {id:"c", t:"Tổ ong", ok:false},
+      ]}},
+  { id:"ho", kind:"animal", name:"Hổ", short:"Hổ", icon:"tiger", mission:"M4", far:1, x:342, y:288,
+    hint:"Sát đường Nguyễn Hữu Cảnh",
+    prompt:"Hổ đang làm gì?" },
+  { id:"casau", kind:"animal", name:"Cá sấu", short:"Cá sấu", icon:"croc", mission:"M5", far:1, x:358, y:314,
+    hint:"Gần Nguyễn Hữu Cảnh",
+    prompt:"Chạm để mở hồ sơ idol của cá sấu",
+    idol:{ name:"Nanh", species:"Cá sấu siamese", dob:"09.05.2012",
+      fact:"Lực cắn rất mạnh nhưng không nhai, chỉ xé rồi nuốt." } },
+  { id:"dadiu", kind:"animal", name:"Đà điểu", short:"Đà điểu", icon:"ostrich", mission:"M2", far:1, x:356, y:204,
+    hint:"Phía Nguyễn Hữu Cảnh",
+    prompt:"Đoán nhanh về đà điểu",
+    quiz:{ q:"Đà điểu bay được không?",
+      answers:[
+        {id:"a", t:"Không, nhưng chạy rất nhanh", ok:true},
+        {id:"b", t:"Bay xa như đại bàng", ok:false},
+        {id:"c", t:"Chỉ bay khi có gió", ok:false},
+      ]}},
+];
+
+const DEMO_ORDER = ["b1", "khi", "vooc", "duoiuoi", "gau", "hama"];
+
+const GOALS = [
+  { id:"demo", title:"Chơi thử", count:6, time:"khoảng 50 phút",
+    desc:"Đủ năm mẫu nhiệm vụ và một trạm break.",
+    pick: DEMO_ORDER.slice(), ordered: true },
+  { id:"chill", title:"Khách chill", count:5, time:"khoảng 45 phút",
+    desc:"Ít trạm, gần cổng và dễ quan sát.",
+    pick:["b1","b10","khi","vooc","gau"] },
+  { id:"explore", title:"Người khám phá", count:8, time:"khoảng 90 phút",
+    desc:"Lẫn thú và điểm check-in, độ khó vừa.",
+    pick:["b1","khi","vooc","duoiuoi","b2","b7","voi","ho"] },
+  { id:"orang", title:"Thánh săn đười ươi", count:7, time:"khoảng 75 phút",
+    desc:"Ưu tiên đười ươi và khu linh trưởng.",
+    pick:["b1","duoiuoi","khi","vooc","gau","b2","voi"] },
+  { id:"legend", title:"Nhà thám hiểm", count:12, time:"cả buổi",
+    desc:"Nhiều trạm, có chuồng xa và nhiệm vụ bắt chước.",
+    pick:["b1","b2","b3","b7","b6","b10","duoiuoi","ho","voi","hcc","sutu","hama"] },
+];
+
+function station(id) { return STATIONS.find(s => s.id === id); }
+function diffOf(s) {
+  const base = { M1:2, M2:2, M3:3, M4:1, M5:1 }[s.mission] || 1;
+  return Math.min(3, base + (s.far || 0));
+}
+function diffLabel(n) { return n >= 3 ? "Khó" : n === 2 ? "Trung bình" : "Dễ"; }
+function rarityOf(s) { return diffOf(s) >= 3 ? "Cực hiếm" : diffOf(s) === 2 ? "Hiếm" : "Thường"; }
+function missionType(s) { return state.fallbackM4 ? "M4" : s.mission; }
+
+function defaultState() {
+  return {
+    screen: "login",
+    user: { email:"", name:"", dob:"" },
+    paused: false,
+    help: false,
+    showHowto: false,
+    goalId: "demo",
+    targetCount: 6,
+    desiredTitle: "Chơi thử",
+    selected: DEMO_ORDER.slice(),
+    currentId: "b1",
+    nextId: null,
+    completed: [],
+    fallbackM4: false,
+    photoDraft: null,
+    frameMode: "solo",
+    idolOpen: false,
+    quizLocked: false,
+    quizPicked: null,
+    nfcBusy: false,
+    finaleStep: 0,
+    shareSheet: "",
+    trail: [],
+    routePath: [],
+    routeKey: "",
+    walkDist: 0,
+    walkPaused: false,
+    walkSpeed: WALK_SPEED,
+    arrived: false,
+    userPos: { x:200, y:472 },
+    heading: 0,
+    camMode: "fit",
+    fitUntil: 0,
+  };
+}
+
+let state = load();
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return defaultState();
+    const parsed = JSON.parse(raw);
+    return Object.assign(defaultState(), parsed, {
+      user: Object.assign({ email:"", name:"", dob:"" }, parsed.user || {}),
+    });
+  } catch { return defaultState(); }
+}
+function save() {
+  const copy = { ...state, photoDraft: state.photoDraft && state.photoDraft.length > 180000 ? null : state.photoDraft };
+  try { localStorage.setItem(KEY, JSON.stringify(copy)); } catch {}
+}
+
+let transitioning = false;
+function go(screen, extra={}) {
+  Object.assign(state, extra, { screen });
+  save();
+  const app = $("#app");
+  if (reduceMotion() || !app || transitioning) { render(); return; }
+  transitioning = true;
+  app.classList.add("is-leaving");
+  setTimeout(() => { transitioning = false; render(); }, 220);
+}
+
+function remaining() {
+  return state.selected.filter(id => !state.completed.some(c => c.id === id));
+}
+function nextInPlan(fromId) {
+  const left = remaining();
+  if (!left.length) return null;
+  const goal = GOALS.find(g => g.id === state.goalId);
+  if (goal && goal.ordered) {
+    return left.sort((a,b) => DEMO_ORDER.indexOf(a) - DEMO_ORDER.indexOf(b))[0];
+  }
+  left.sort((a,b) => graphDist(fromId, a) - graphDist(fromId, b));
+  return left[0];
+}
+
+const LANDMARKS = [
+  {x:200,y:478, name:"cổng chính"},
+  {x:162,y:428, name:"đền thờ Vua Hùng"},
+  {x:274,y:372, name:"hồ sen"},
+  {x:176,y:300, name:"hồ nước"},
+  {x:206,y:250, name:"ngã ba trung tâm"},
+  {x:92,y:148, name:"ao phía tây"},
+  {x:96,y:318, name:"khu châu Phi"},
+  {x:340,y:260, name:"khu thú ăn thịt"},
+  {x:220,y:90, name:"sông Thị Nghè"},
+  {x:232,y:392, name:"nhà lan"},
+  {x:306,y:162, name:"hồ hà mã"},
+  {x:278,y:368, name:"tượng ếch"},
+];
+
+function sampleCubic(p0, p1, p2, p3, n) {
+  const pts = [];
+  for (let i = 0; i <= n; i++) {
+    const t = i / n, u = 1 - t;
+    pts.push({
+      x: u*u*u*p0.x + 3*u*u*t*p1.x + 3*u*t*t*p2.x + t*t*t*p3.x,
+      y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y,
+    });
+  }
+  return pts;
+}
+
+function buildGraph() {
+  const nodes = [];
+  const MERGE = 16;
+  function addNode(x, y, name) {
+    for (const n of nodes) {
+      if (Math.hypot(n.x - x, n.y - y) < MERGE) {
+        n.x = (n.x + x) / 2; n.y = (n.y + y) / 2;
+        if (name && !n.name) n.name = name;
+        return n.id;
+      }
+    }
+    const id = nodes.length;
+    nodes.push({ id, x, y, name: name || null });
+    return id;
+  }
+  const rawEdges = [];
+  function link(a, b) {
+    if (a === b) return;
+    rawEdges.push([a, b]);
+  }
+  function addChain(pts) {
+    let prev = null;
+    for (const p of pts) {
+      const id = addNode(p.x, p.y, p.name);
+      if (prev != null) link(prev, id);
+      prev = id;
+    }
+  }
+  const beziers = [
+    [{x:200,y:478},{x:198,y:400},{x:186,y:330},{x:206,y:250}],
+    [{x:206,y:250},{x:220,y:190},{x:226,y:140},{x:220,y:100}],
+    [{x:206,y:250},{x:140,y:248},{x:100,y:280},{x:96,y:318}],
+    [{x:206,y:250},{x:280,y:246},{x:330,y:250},{x:348,y:290}],
+    [{x:190,y:400},{x:160,y:396},{x:130,y:360},{x:112,y:354}],
+    [{x:230,y:400},{x:270,y:390},{x:300,y:360},{x:278,y:368}],
+    [{x:226,y:160},{x:270,y:150},{x:300,y:150},{x:306,y:162}],
+    [{x:80,y:176},{x:90,y:200},{x:100,y:230},{x:96,y:270}],
+  ];
+  for (const b of beziers) addChain(sampleCubic(b[0], b[1], b[2], b[3], 16));
+  const chains = [
+    [{x:198,y:400},{x:230,y:400}],
+    [{x:220,y:100},{x:170,y:86},{x:118,y:74}],
+    [{x:220,y:100},{x:248,y:94},{x:270,y:90}],
+    [{x:330,y:250},{x:348,y:220},{x:356,y:204}],
+    [{x:348,y:290},{x:358,y:314}],
+  ];
+  for (const c of chains) addChain(c);
+  for (const lm of LANDMARKS) addNode(lm.x, lm.y, lm.name);
+
+  const stationNode = {};
+  for (const s of STATIONS) {
+    let best = 0, bd = 1e9;
+    for (const n of nodes) {
+      const d = Math.hypot(n.x - s.x, n.y - s.y);
+      if (d < bd) { bd = d; best = n.id; }
+    }
+    const sid = addNode(s.x, s.y, s.name);
+    link(sid, best);
+    stationNode[s.id] = sid;
+  }
+
+  const adj = nodes.map(() => []);
+  for (const [a, b] of rawEdges) {
+    const w = Math.hypot(nodes[a].x - nodes[b].x, nodes[a].y - nodes[b].y);
+    adj[a].push({ to:b, w });
+    adj[b].push({ to:a, w });
+  }
+  return { nodes, adj, stationNode };
+}
+
+const GRAPH = buildGraph();
+
+function shortestPath(fromId, toId) {
+  const src = GRAPH.stationNode[fromId];
+  const dst = GRAPH.stationNode[toId];
+  if (src == null || dst == null) return [];
+  if (src === dst) {
+    const n = GRAPH.nodes[src];
+    return [{ x:n.x, y:n.y, name:n.name }];
+  }
+  const N = GRAPH.nodes.length;
+  const dist = Array(N).fill(Infinity);
+  const prev = Array(N).fill(-1);
+  const used = Array(N).fill(false);
+  dist[src] = 0;
+  for (let k = 0; k < N; k++) {
+    let u = -1;
+    for (let i = 0; i < N; i++) if (!used[i] && (u < 0 || dist[i] < dist[u])) u = i;
+    if (u < 0 || dist[u] === Infinity) break;
+    used[u] = true;
+    if (u === dst) break;
+    for (const e of GRAPH.adj[u]) {
+      if (dist[u] + e.w < dist[e.to]) {
+        dist[e.to] = dist[u] + e.w;
+        prev[e.to] = u;
+      }
+    }
+  }
+  if (dist[dst] === Infinity) {
+    const A = station(fromId), B = station(toId);
+    return A && B ? [{x:A.x,y:A.y},{x:B.x,y:B.y}] : [];
+  }
+  const ids = [];
+  for (let u = dst; u !== -1; u = prev[u]) ids.push(u);
+  ids.reverse();
+  return ids.map(i => ({ x: GRAPH.nodes[i].x, y: GRAPH.nodes[i].y, name: GRAPH.nodes[i].name }));
+}
+
+function graphDist(a, b) {
+  return pathLen(shortestPath(a, b));
+}
+function pathLen(pts) {
+  let n = 0;
+  for (let i = 1; i < (pts || []).length; i++) n += Math.hypot(pts[i].x - pts[i-1].x, pts[i].y - pts[i-1].y);
+  return n;
+}
+function headingOf(a, b) {
+  return Math.atan2(b.x - a.x, a.y - b.y) * 180 / Math.PI;
+}
+function pointAlong(pts, dist) {
+  if (!pts || !pts.length) return { x:200, y:472, heading:0 };
+  if (pts.length === 1 || dist <= 0) {
+    const h = pts[1] ? headingOf(pts[0], pts[1]) : 0;
+    return { x: pts[0].x, y: pts[0].y, heading: h };
+  }
+  let left = dist;
+  for (let i = 1; i < pts.length; i++) {
+    const d = Math.hypot(pts[i].x - pts[i-1].x, pts[i].y - pts[i-1].y);
+    if (left <= d || i === pts.length - 1) {
+      const t = d < 0.001 ? 0 : Math.min(1, left / d);
+      return {
+        x: pts[i-1].x + (pts[i].x - pts[i-1].x) * t,
+        y: pts[i-1].y + (pts[i].y - pts[i-1].y) * t,
+        heading: headingOf(pts[i-1], pts[i]),
+      };
+    }
+    left -= d;
+  }
+}
+function polylineTo(pts, dist) {
+  const out = [];
+  if (!pts || !pts.length) return out;
+  out.push({ x: pts[0].x, y: pts[0].y });
+  let left = dist;
+  for (let i = 1; i < pts.length; i++) {
+    const d = Math.hypot(pts[i].x - pts[i-1].x, pts[i].y - pts[i-1].y);
+    if (left >= d) { out.push({ x: pts[i].x, y: pts[i].y }); left -= d; }
+    else {
+      const t = d < 0.001 ? 0 : left / d;
+      out.push({ x: pts[i-1].x + (pts[i].x - pts[i-1].x) * t, y: pts[i-1].y + (pts[i].y - pts[i-1].y) * t });
+      break;
+    }
+  }
+  return out;
+}
+function polylineFrom(pts, dist) {
+  if (!pts || !pts.length) return [];
+  const start = pointAlong(pts, dist);
+  const out = [{ x: start.x, y: start.y }];
+  let acc = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const d = Math.hypot(pts[i].x - pts[i-1].x, pts[i].y - pts[i-1].y);
+    if (acc + d >= dist - 0.01) out.push({ x: pts[i].x, y: pts[i].y });
+    acc += d;
+  }
+  return out;
+}
+function pathD(pts) {
+  if (!pts || pts.length < 2) return "";
+  return pts.map((p,i) => `${i?"L":"M"}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
+}
+function distToSeg(p, a, b) {
+  const vx = b.x-a.x, vy = b.y-a.y;
+  const w = vx*vx + vy*vy;
+  if (w < 1e-6) return Math.hypot(p.x-a.x, p.y-a.y);
+  let t = ((p.x-a.x)*vx + (p.y-a.y)*vy) / w;
+  t = Math.max(0, Math.min(1, t));
+  return Math.hypot(p.x - (a.x+t*vx), p.y - (a.y+t*vy));
+}
+function simplify(pts, eps) {
+  if (!pts || pts.length < 3) return (pts || []).slice();
+  let idx = 0, maxd = 0;
+  const a = pts[0], b = pts[pts.length-1];
+  for (let i = 1; i < pts.length-1; i++) {
+    const d = distToSeg(pts[i], a, b);
+    if (d > maxd) { maxd = d; idx = i; }
+  }
+  if (maxd > eps) {
+    const left = simplify(pts.slice(0, idx+1), eps);
+    const right = simplify(pts.slice(idx), eps);
+    return left.slice(0, -1).concat(right);
+  }
+  return [a, b];
+}
+function distToPointAlong(pts, p) {
+  let best = 0, bd = 1e9, acc = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i-1], b = pts[i];
+    const vx = b.x-a.x, vy = b.y-a.y;
+    const w = vx*vx + vy*vy;
+    const t = w < 1e-6 ? 0 : Math.max(0, Math.min(1, ((p.x-a.x)*vx + (p.y-a.y)*vy)/w));
+    const qx = a.x + t*vx, qy = a.y + t*vy;
+    const d = Math.hypot(p.x-qx, p.y-qy);
+    if (d < bd) { bd = d; best = acc + Math.hypot(qx-a.x, qy-a.y); }
+    acc += Math.hypot(vx, vy);
+  }
+  return best;
+}
+function nearestLandmarkName(p) {
+  let best = "", bd = 30;
+  for (const lm of LANDMARKS) {
+    const d = Math.hypot(lm.x-p.x, lm.y-p.y);
+    if (d < bd) { bd = d; best = lm.name; }
+  }
+  return best;
+}
+function fmtMeters(m) {
+  m = Math.max(0, Math.round(m));
+  if (m >= 20) m = Math.round(m / 10) * 10;
+  return m + " m";
+}
+function instructionText(pts, dist, destName) {
+  const total = pathLen(pts);
+  const remain = total - dist;
+  if (!pts || pts.length < 2 || remain <= ARRIVE) {
+    return destName ? `Bạn đã tới ${destName}` : "Bạn đã tới nơi";
+  }
+  const simp = simplify(pts, 18);
+  const turns = [];
+  for (let i = 1; i < simp.length-1; i++) {
+    const a = simp[i-1], b = simp[i], c = simp[i+1];
+    const v1x = b.x-a.x, v1y = b.y-a.y, v2x = c.x-b.x, v2y = c.y-b.y;
+    const mag = Math.hypot(v1x,v1y) * Math.hypot(v2x,v2y);
+    if (mag < 1) continue;
+    const ang = Math.acos(Math.max(-1, Math.min(1, (v1x*v2x + v1y*v2y) / mag))) * 180 / Math.PI;
+    if (ang < 55) continue;
+    const cross = v1x*v2y - v1y*v2x;
+    const dir = cross > 0 ? "phải" : "trái";
+    const along = distToPointAlong(pts, b);
+    const lm = b.name || nearestLandmarkName(b);
+    turns.push({ along, dir, landmark: lm });
+  }
+  const next = turns.find(t => t.along > dist + 10);
+  if (!next) return `Đi thẳng tới ${destName}, còn ${fmtMeters(remain * M_PER_UNIT)}`;
+  const toTurnM = (next.along - dist) * M_PER_UNIT;
+  const where = next.landmark ? ` ở ${next.landmark}` : "";
+  if (toTurnM < 28) return `Rẽ ${next.dir}${where}`;
+  return `Đi thẳng ${fmtMeters(toTurnM)} rồi rẽ ${next.dir}${where}`;
+}
+
+function ensureRoute() {
+  const key = state.currentId + ">" + state.nextId;
+  if (state.routeKey === key && state.routePath && state.routePath.length) return;
+  state.routeKey = key;
+  const dest = station(state.nextId);
+  const here = station(state.currentId) || station("b1");
+  if (!dest) {
+    state.routePath = [{ x: here.x, y: here.y }];
+    state.walkDist = 0;
+    state.arrived = true;
+    state.userPos = { x: here.x, y: here.y };
+    return;
+  }
+  if (here.id === dest.id) {
+    state.routePath = [{ x: dest.x, y: dest.y }];
+    state.walkDist = 0;
+    state.arrived = true;
+    state.userPos = { x: dest.x, y: dest.y };
+    state.camMode = "follow";
+    state.fitUntil = 0;
+    return;
+  }
+  state.routePath = shortestPath(here.id, dest.id);
+  state.walkDist = 0;
+  state.arrived = pathLen(state.routePath) < ARRIVE;
+  const pos = pointAlong(state.routePath, 0);
+  state.userPos = { x: pos.x, y: pos.y };
+  state.heading = pos.heading;
+  state.camMode = "fit";
+  state.fitUntil = Date.now() + 1100;
+  state.walkPaused = reduceMotion();
+}
+
+function verifyGraph() {
+  const missing = [];
+  for (const s of STATIONS) {
+    for (const t of STATIONS) {
+      if (s.id === t.id) continue;
+      const p = shortestPath(s.id, t.id);
+      if (!p || p.length < 2) missing.push(s.id + ">" + t.id);
+    }
+  }
+  return missing;
+}
+function iconSvg(name, size=28) {
+  return `<svg viewBox="0 0 48 48" width="${size}" height="${size}" aria-hidden="true">${ICO[name] || ICO.gate}</svg>`;
+}
+
+let cam = { x: 0, y: 0, w: 400, h: 516 };
+let camTarget = { x: 0, y: 0, w: 400, h: 516 };
+let navRaf = 0;
+let lastNavTs = 0;
+
+function boundsOf(pts, pad=36) {
+  let minx=1e9, miny=1e9, maxx=-1e9, maxy=-1e9;
+  for (const p of pts || []) {
+    minx = Math.min(minx, p.x); miny = Math.min(miny, p.y);
+    maxx = Math.max(maxx, p.x); maxy = Math.max(maxy, p.y);
+  }
+  if (!isFinite(minx)) return { x:0, y:0, w:400, h:516 };
+  let w = Math.max(170, maxx - minx + pad * 2);
+  let h = Math.max(210, maxy - miny + pad * 2);
+  const aspect = 0.78;
+  if (w / h > aspect) h = w / aspect; else w = h * aspect;
+  return { x: (minx + maxx) / 2 - w / 2, y: (miny + maxy) / 2 - h / 2, w, h };
+}
+function clampCam(c) {
+  const w = Math.min(400, Math.max(140, c.w));
+  const h = Math.min(516, Math.max(180, c.h));
+  return { w, h, x: Math.max(-20, Math.min(420 - w, c.x)), y: Math.max(-20, Math.min(536 - h, c.y)) };
+}
+function targetCam() {
+  if (state.camMode === "follow" && state.userPos) {
+    const w = 220, h = 290;
+    const rad = (state.heading || 0) * Math.PI / 180;
+    const lx = Math.sin(rad) * 26;
+    const ly = -Math.cos(rad) * 26;
+    return clampCam({ x: state.userPos.x + lx - w/2, y: state.userPos.y + ly - h/2, w, h });
+  }
+  if (state.camMode === "free") return camTarget;
+  const pts = (state.routePath || []).slice();
+  if (state.userPos) pts.push(state.userPos);
+  const dest = station(state.nextId);
+  if (dest) pts.push({ x: dest.x, y: dest.y });
+  return clampCam(boundsOf(pts, 42));
+}
+
+function mapDecor() {
+  return `
+    <rect width="400" height="516" fill="var(--color-map-water)"/>
+    <path d="M0 0 H400 V86 Q300 64 210 74 Q90 86 0 54 Z" fill="#A9BCC2"/>
+    <text x="200" y="36" text-anchor="middle" fill="#1C1B19" font-family="Be Vietnam Pro, sans-serif" font-size="12" font-weight="800">SÔNG THỊ NGHÈ</text>
+    <path d="M48 210 C30 160 38 95 95 62 C150 38 210 44 270 50 C330 56 372 78 382 130 C392 185 386 240 378 290 C370 345 388 400 358 440 C328 478 250 488 200 490 C145 492 78 478 55 438 C34 402 52 355 46 310 C40 268 58 238 48 210 Z"
+      fill="var(--color-map-land)"/>
+    <ellipse cx="92" cy="148" rx="42" ry="28" fill="var(--color-map-water)"/>
+    <ellipse cx="176" cy="300" rx="26" ry="16" fill="var(--color-map-water)"/>
+    <ellipse cx="274" cy="372" rx="36" ry="24" fill="var(--color-map-water)"/>
+    <ellipse cx="306" cy="162" rx="22" ry="16" fill="var(--color-map-water)"/>
+    <path d="M86 140 C70 110 60 88 78 70 C96 80 110 100 108 128" fill="#B7C99A" opacity=".7"/>
+    <path d="M300 70 C320 60 350 78 358 110 C340 100 318 96 300 88" fill="var(--color-butter)" opacity=".55"/>
+    <path d="M310 230 C340 210 370 230 368 280 C350 270 328 250 312 246" fill="var(--color-peach)" opacity=".65"/>
+    <path d="M70 300 C60 340 90 380 130 370 C120 330 100 310 84 304" fill="var(--color-taupe)" opacity=".75"/>
+    <path d="M150 400 C180 380 240 390 260 430 C200 440 160 430 150 400" fill="var(--color-lilac)" opacity=".55"/>
+    <path d="M200 478 C198 400 186 330 206 250 C220 190 226 140 220 100
+             M206 250 C140 248 100 280 96 318
+             M206 250 C280 246 330 250 348 290
+             M190 400 C160 396 130 360 112 354
+             M230 400 C270 390 300 360 278 368
+             M226 160 C270 150 300 150 306 162
+             M80 176 C90 200 100 230 96 270"
+      fill="none" stroke="var(--color-map-path)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(338,78)">
+      <circle r="20" fill="#F7F4EE"/>
+      <g stroke="#1C1B19" stroke-width="1.2">
+        <line y1="-20" y2="20"/><line x1="-20" x2="20"/><line x1="-14" y1="-14" x2="14" y2="14"/><line x1="14" y1="-14" x2="-14" y2="14"/>
+      </g>
+      <circle r="4" fill="var(--color-lilac)"/>
+    </g>
+    <path d="M184 478 h32 v-10 h6 l-22 -16 -22 16 h6 z" fill="#F7F4EE"/>
+    <g font-family="Be Vietnam Pro, sans-serif" font-weight="700" fill="#1C1B19">
+      <text x="200" y="510" text-anchor="middle" font-size="8">Đ. NGUYỄN BỈNH KHIÊM</text>
+      <text x="92" y="340" text-anchor="middle" font-size="7" opacity=".7">Khu châu Phi</text>
+      <text x="338" y="228" text-anchor="middle" font-size="7" opacity=".7">Thú ăn thịt</text>
+      <text x="274" y="402" text-anchor="middle" font-size="7" opacity=".7">Hồ sen</text>
+    </g>
+    <text x="14" y="270" transform="rotate(-90 14 270)" text-anchor="middle" font-size="8" font-weight="700" fill="#1C1B19" font-family="Be Vietnam Pro, sans-serif">Đ. NGUYỄN THỊ MINH KHAI</text>
+    <text x="390" y="250" transform="rotate(90 390 250)" text-anchor="middle" font-size="8" font-weight="700" fill="#1C1B19" font-family="Be Vietnam Pro, sans-serif">Đ. NGUYỄN HỮU CẢNH</text>`;
+}
+
+function mapSvg(opts={}) {
+  const mode = opts.mode || "full";
+  const here = station(state.currentId) || station("b1");
+  const next = state.nextId ? station(state.nextId) : null;
+  const selected = new Set(state.selected);
+  const done = new Set(state.completed.map(c => c.id));
+  const showAllLabels = mode === "full" || mode === "pick";
+  const user = state.userPos || (here ? { x: here.x, y: here.y } : { x:200, y:472 });
+
+  const markers = STATIONS.map(s => {
+    const isHere = here && s.id === here.id;
+    const isNext = next && s.id === next.id;
+    const isDone = done.has(s.id);
+    const isSel = selected.has(s.id);
+    const faded = (mode === "nav" || mode === "wrap") && !isSel && !isHere;
+    const fill = isDone ? "var(--color-sage)" : (s.kind === "break" ? "var(--color-lilac)" : "var(--color-sage)");
+    const r = isNext || isHere ? 13 : 11;
+    const op = faded ? .32 : 1;
+    const keyLabels = ["b1","b12","b2","b10","b3","duoiuoi","voi","hcc","ho","tegiac","sutu","huounai","khi","hama","gau"];
+    const showLabel = !isHere && (isNext || isDone || (showAllLabels && !faded && keyLabels.includes(s.id)));
+    const lw = Math.max(46, s.short.length * 6.2 + 10);
+    const ly = s.y + 15;
+    const label = showLabel ? `<g>
+      <rect x="${s.x - lw/2}" y="${ly}" width="${lw}" height="13" rx="6" fill="#F7F4EE"/>
+      <text x="${s.x}" y="${ly + 9.5}" text-anchor="middle" font-size="7.2" font-family="Be Vietnam Pro, sans-serif" font-weight="700" fill="#1C1B19">${esc(s.short)}</text>
+    </g>` : "";
+    const ring = (isNext && mode !== "nav") ? `<circle cx="${s.x}" cy="${s.y}" r="18" fill="none" stroke="var(--color-you)" stroke-width="3" opacity=".8"/>` : "";
+    return `<g data-sid="${s.id}" opacity="${op}">
+      ${ring}
+      <circle cx="${s.x}" cy="${s.y}" r="${r}" fill="${fill}"/>
+      <g transform="translate(${s.x},${s.y}) scale(0.38) translate(-24,-24)" color="#1C1B19">${ICO[s.icon] || ""}</g>
+      ${label}
+    </g>`;
+  }).join("");
+
+  let routes = "";
+  if (mode === "nav") {
+    const walked = pathD([...(state.trail || []), ...polylineTo(state.routePath, state.walkDist || 0)]);
+    const remain = pathD(polylineFrom(state.routePath, state.walkDist || 0));
+    routes = `
+      <path id="routeWalked" d="${walked}" fill="none" stroke="var(--color-route-dim)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="routeRemain" d="${remain}" fill="none" stroke="var(--color-route)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`;
+  } else if (mode === "wrap" && state.completed.length > 1) {
+    const pts = [];
+    const ids = state.completed.map(c => c.id);
+    for (let i = 1; i < ids.length; i++) pts.push(...shortestPath(ids[i-1], ids[i]));
+    routes = `<path d="${pathD(pts)}" fill="none" stroke="var(--color-route)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>`;
+  }
+
+  let you = "";
+  if (mode === "nav") {
+    you = `<g id="userPuck" transform="translate(${user.x},${user.y}) rotate(${state.heading || 0})">
+      <polygon points="0,-22 -8,5 8,5" fill="var(--color-dot)" opacity=".32"/>
+      <circle r="14" fill="var(--color-dot)" opacity=".18">
+        <animate attributeName="r" values="11;18;11" dur="1.6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".28;.06;.28" dur="1.6s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="7" fill="var(--color-dot)" stroke="#fff" stroke-width="3"/>
+    </g>`;
+  } else if (here && mode !== "wrap") {
+    const flagX = Math.min(300, Math.max(10, here.x + (here.x > 250 ? -100 : 16)));
+    const flagY = Math.max(10, here.y - (here.y > 450 ? 8 : 26));
+    you = `<g>
+      <circle cx="${here.x}" cy="${here.y}" r="8" fill="var(--color-accent)"/>
+      <rect x="${flagX}" y="${flagY}" width="90" height="18" rx="9" fill="var(--color-you)"/>
+      <text x="${flagX + 45}" y="${flagY + 12.5}" text-anchor="middle" font-size="8" font-family="Be Vietnam Pro, sans-serif" font-weight="800" fill="#1C1B19">Bạn đang ở đây</text>
+    </g>`;
+  }
+
+  const vb = (mode === "nav" && opts.vb) ? opts.vb : "0 0 400 516";
+  return `<svg id="${mode==="nav"?"mapSvg":"mapSvgFull"}" viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bản đồ Thảo Cầm Viên">
+    ${mapDecor()}${routes}${markers}${you}
+  </svg>`;
+}
+
+function paintNav() {
+  const svg = $("#mapSvg");
+  if (!svg) return;
+  svg.setAttribute("viewBox", `${cam.x.toFixed(1)} ${cam.y.toFixed(1)} ${cam.w.toFixed(1)} ${cam.h.toFixed(1)}`);
+  const walked = pathD([...(state.trail || []), ...polylineTo(state.routePath, state.walkDist || 0)]);
+  const remain = pathD(polylineFrom(state.routePath, state.walkDist || 0));
+  const tw = $("#routeWalked");
+  const tr = $("#routeRemain");
+  if (tw) tw.setAttribute("d", walked);
+  if (tr) tr.setAttribute("d", remain);
+  const puck = $("#userPuck");
+  if (puck && state.userPos) {
+    puck.setAttribute("transform", `translate(${state.userPos.x},${state.userPos.y}) rotate(${state.heading || 0})`);
+  }
+  const dest = station(state.nextId);
+  const total = pathLen(state.routePath);
+  const remainU = Math.max(0, total - (state.walkDist || 0));
+  const meters = Math.round(remainU * M_PER_UNIT);
+  const mins = Math.max(1, Math.round(meters / 72));
+  const banner = $("#navBannerText");
+  if (banner) banner.textContent = instructionText(state.routePath, state.walkDist || 0, dest && dest.name);
+  const turnIco = $("#navTurnIco");
+  if (turnIco) {
+    const txt = banner ? banner.textContent : "";
+    turnIco.textContent = txt.includes("trái") ? "↰" : txt.includes("phải") ? "↱" : "↑";
+  }
+  const eta = $("#navEta");
+  if (eta) {
+    eta.textContent = state.arrived || meters <= 25
+      ? "Bạn đang đứng tại trạm"
+      : `${fmtMeters(meters)} · khoảng ${mins === 1 && meters < 80 ? "dưới 1" : mins} phút đi bộ`;
+  }
+  const cta = $("#navCta");
+  const close = state.arrived || meters <= 25;
+  if (cta) {
+    cta.hidden = !close;
+    cta.disabled = !close;
+  }
+  const skip = $("#navSkipWalk");
+  if (skip) skip.hidden = !state.walkPaused || close;
+}
+
+function stopNavRuntime() {
+  if (navRaf) cancelAnimationFrame(navRaf);
+  navRaf = 0;
+}
+function startNavRuntime() {
+  stopNavRuntime();
+  camTarget = targetCam();
+  cam = { ...camTarget };
+  lastNavTs = performance.now();
+  const svg = $("#mapSvg");
+  bindMapPan(svg);
+  paintNav();
+  function loop(now) {
+    if (state.screen !== "nav") return;
+    const dt = Math.min(0.05, (now - lastNavTs) / 1000);
+    lastNavTs = now;
+    if (state.fitUntil && Date.now() >= state.fitUntil && state.camMode === "fit") {
+      state.camMode = "follow";
+    }
+    if (!state.arrived && !state.walkPaused) {
+      const total = pathLen(state.routePath);
+      const speed = state.walkSpeed || WALK_SPEED;
+      state.walkDist = Math.min(total, (state.walkDist || 0) + speed * dt);
+      const pos = pointAlong(state.routePath, state.walkDist);
+      state.userPos = { x: pos.x, y: pos.y };
+      state.heading = pos.heading;
+      if (total - state.walkDist <= ARRIVE) {
+        state.arrived = true;
+        const dest = station(state.nextId);
+        if (dest) state.userPos = { x: dest.x, y: dest.y };
+      }
+    }
+    camTarget = targetCam();
+    const k = reduceMotion() ? 1 : 0.14;
+    cam.x += (camTarget.x - cam.x) * k;
+    cam.y += (camTarget.y - cam.y) * k;
+    cam.w += (camTarget.w - cam.w) * k;
+    cam.h += (camTarget.h - cam.h) * k;
+    paintNav();
+    navRaf = requestAnimationFrame(loop);
+  }
+  navRaf = requestAnimationFrame(loop);
+}
+function bindMapPan(svg) {
+  if (!svg || svg._panBound) return;
+  svg._panBound = true;
+  let dragging = false, lx = 0, ly = 0;
+  svg.addEventListener("pointerdown", (e) => {
+    dragging = true; lx = e.clientX; ly = e.clientY;
+    try { svg.setPointerCapture(e.pointerId); } catch {}
+  });
+  svg.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - lx, dy = e.clientY - ly;
+    if (Math.abs(dx) + Math.abs(dy) < 2) return;
+    state.camMode = "free";
+    const k = cam.w / (svg.clientWidth || 390);
+    camTarget = { ...cam, x: cam.x - dx * k, y: cam.y - dy * k };
+    camTarget = clampCam(camTarget);
+    lx = e.clientX; ly = e.clientY;
+  });
+  const end = () => { dragging = false; };
+  svg.addEventListener("pointerup", end);
+  svg.addEventListener("pointercancel", end);
+}
+
+function topbar(title, opts={}) {
+  const back = opts.back ? `<button class="icon-btn" data-act="${opts.back}" aria-label="Quay lại">‹</button>` : `<button class="icon-btn" data-act="help" aria-label="Trợ giúp">?</button>`;
+  const right = opts.hidePause ? `<span style="width:36px"></span>` : `<button class="icon-btn" data-act="pause" aria-label="Tạm dừng">Ⅱ</button>`;
+  return `<div class="topbar ${opts.abs?"nav-top-abs":""}">
+    ${back}
+    <h2>${esc(title || "Choo Zoo")}</h2>
+    ${right}
+  </div>`;
+}
+function mascotMini() {
+  return `<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+    <circle cx="14" cy="16" r="7" fill="#c48b6a"/>
+    <circle cx="34" cy="16" r="7" fill="#c48b6a"/>
+    <circle cx="24" cy="26" r="14" fill="#d4a574"/>
+    <ellipse cx="24" cy="30" rx="8" ry="7" fill="#efd2b3"/>
+    <circle cx="19" cy="25" r="2.1" fill="#1C1B19"/>
+    <circle cx="29" cy="25" r="2.1" fill="#1C1B19"/>
+    <path d="M21 33c2 2 4 2 6 0" fill="none" stroke="#1C1B19" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>`;
+}
+function heroArt() {
+  return `<svg viewBox="0 0 220 90" width="100%" height="86" aria-hidden="true" style="position:absolute;right:-6px;bottom:-8px">
+    <ellipse cx="150" cy="78" rx="70" ry="12" fill="rgba(28,27,25,.06)"/>
+    <circle cx="168" cy="28" r="16" fill="#E0B034"/>
+    <path d="M20 80 C40 40 70 50 90 80 Z" fill="#6B7F45"/>
+    <path d="M70 80 C90 34 124 38 148 80 Z" fill="#7A9148"/>
+    <path d="M130 80 C150 48 176 52 196 80 Z" fill="#6B7F45"/>
+  </svg>`;
+}
+
+function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+function displayName() {
+  const n = String(state.user && state.user.name || "").trim();
+  return n || "bạn";
+}
+function parseDob(dob) {
+  const m = String(dob || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!m) return { y:"", m:"", d:"" };
+  return { y: m[1], m: String(+m[2]), d: String(+m[3]) };
+}
+function isValidDob(y, mo, d) {
+  y = +y; mo = +mo; d = +d;
+  if (!y || !mo || !d) return false;
+  const dt = new Date(y, mo - 1, d);
+  if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return false;
+  if (dt > new Date()) return false;
+  if (y < 1920) return false;
+  return true;
+}
+function dobSelects() {
+  const dob = parseDob(state.user.dob);
+  const yearNow = new Date().getFullYear();
+  const dayOpts = [`<option value="">Ngày</option>`].concat(
+    Array.from({ length: 31 }, (_, i) => {
+      const v = String(i + 1);
+      const label = String(i + 1).padStart(2, "0");
+      return `<option value="${v}" ${dob.d===v?"selected":""}>${label}</option>`;
+    })
+  ).join("");
+  const monthOpts = [`<option value="">Tháng</option>`].concat(
+    Array.from({ length: 12 }, (_, i) => {
+      const v = String(i + 1);
+      const label = String(i + 1).padStart(2, "0");
+      return `<option value="${v}" ${dob.m===v?"selected":""}>${label}</option>`;
+    })
+  ).join("");
+  const years = [];
+  for (let y = yearNow - 4; y >= 1926; y--) years.push(y);
+  const yearOpts = [`<option value="">Năm</option>`].concat(
+    years.map(y => `<option value="${y}" ${dob.y===String(y)?"selected":""}>${y}</option>`)
+  ).join("");
+  return { dayOpts, monthOpts, yearOpts };
+}
+
+function renderLogin() {
+  return `<div class="screen" data-screen="login">
+    <div class="pad" style="padding-top:28px">
+      <p class="chip butter" style="margin-bottom:14px">Thảo Cầm Viên Sài Gòn</p>
+      <h1 style="font-size:42px;letter-spacing:-.04em">Choo Zoo</h1>
+      <p class="lead" style="margin:10px 0 22px">Nhiệm vụ khi đi chơi sở thú. Chỉ cần mail để vào.</p>
+      <div class="card">
+        <div class="field">
+          <label for="email">Mail của bạn</label>
+          <input id="email" name="email" type="email" inputmode="email" placeholder="ban@mail.com" value="${esc(state.user.email)}" autocomplete="email" />
+        </div>
+        <button class="btn" data-act="send-link">Tiếp tục</button>
+        <p class="tiny" style="margin-top:12px;text-align:center">Không cần mật khẩu. Bản chạy thử sẽ gửi một link giả lập, rồi hỏi cách gọi và ngày sinh.</p>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderProfile() {
+  const sels = dobSelects();
+  return `<div class="screen" data-screen="profile">
+    <div class="pad" style="padding-top:28px">
+      <p class="tiny">Sắp vào vườn</p>
+      <h1>Vài thông tin nữa</h1>
+      <p class="lead" style="margin:10px 0 20px">Cho em biết cách gọi và ngày sinh, rồi bắt đầu.</p>
+      <div class="card">
+        <div class="field">
+          <label for="uname">Bạn muốn được gọi là gì</label>
+          <input id="uname" name="name" type="text" maxlength="24" placeholder="Tên hoặc biệt danh" value="${esc(state.user.name)}" autocomplete="nickname" />
+        </div>
+        <div class="field">
+          <label>Ngày tháng năm sinh</label>
+          <div class="dob-row">
+            <select id="dob-d" aria-label="Ngày">${sels.dayOpts}</select>
+            <select id="dob-m" aria-label="Tháng">${sels.monthOpts}</select>
+            <select id="dob-y" aria-label="Năm">${sels.yearOpts}</select>
+          </div>
+          <p class="tiny" style="margin-top:8px">Thứ tự ngày / tháng / năm, ví dụ 16 / 08 / 2006.</p>
+        </div>
+        <button class="btn" data-act="save-profile">Tiếp tục</button>
+        <button class="btn ghost" style="margin-top:10px" data-act="back-login">Dùng mail khác</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderStart() {
+  return `<div class="screen" data-screen="start">
+    <div class="pad" style="padding-top:8px">
+      <div class="greet">
+        <div>
+          <p class="tiny">Chào ${esc(displayName())},</p>
+          <h1>hôm nay đi đâu?</h1>
+        </div>
+        <div class="avatar">${mascotMini()}</div>
+      </div>
+      <div class="chip-row" style="margin-top:14px">
+        ${["M1","M2","M3","M4","M5"].map(m => `<span class="chip-btn" style="display:grid;place-items:center;flex:0 0 36px">${m.slice(1)}</span>`).join("")}
+        <span class="chip butter">Chơi thử · 6 trạm</span>
+      </div>
+      <div class="hero-pair">
+        <div class="hero-main">
+          <h3>Sẵn sàng vào vườn</h3>
+          <p class="tiny" style="max-width:160px">Chọn trạm, đi theo chỉ dẫn, chạm NFC rồi làm nhiệm vụ.</p>
+          ${heroArt()}
+        </div>
+        <button class="hero-side" data-act="to-map">Bản đồ</button>
+      </div>
+      <div class="hscroll">
+        <button class="hcard" style="background:var(--color-peach)" data-act="howto">
+          <b>Cách chơi</b>
+          <span>Bốn bước, một tay là đủ.</span>
+        </button>
+        <button class="hcard" style="background:var(--color-lilac)" data-act="play-demo">
+          <b>Chơi thử</b>
+          <span>Năm mẫu nhiệm vụ và một trạm break.</span>
+        </button>
+      </div>
+    </div>
+    <div class="sticky"><button class="btn" data-act="begin">Bắt đầu</button></div>
+    <nav class="bnav" aria-label="Điều hướng">
+      <button class="on" data-act="noop">${iconSvg("gate",18)}Nhà</button>
+      <button data-act="to-map">${iconSvg("temple",18)}Bản đồ</button>
+      <button class="plus" data-act="begin" aria-label="Bắt đầu">+</button>
+      <button data-act="begin">${iconSvg("orchid",18)}Hành trình</button>
+      <button data-act="help">${iconSvg("orang",18)}Trợ giúp</button>
+    </nav>
+  </div>`;
+}
+
+function renderMapPreview() {
+  return `<div class="screen" data-screen="map">
+    ${topbar("Bản đồ", { back:"to-start" })}
+    <div class="pad" style="padding-top:0">
+      <div class="map-card" style="height:420px;margin:0">${mapSvg({ mode:"full" })}</div>
+      <p class="tiny" style="margin:12px 4px 0">Bản đồ vẽ lại từ sơ đồ Thảo Cầm Viên. Chấm vàng là vị trí vừa chạm NFC, mặc định ở cổng chính.</p>
+    </div>
+    <div class="sticky"><button class="btn" data-act="begin">Bắt đầu</button></div>
+  </div>`;
+}
+
+function renderChoose() {
+  const n = state.selected.length;
+  return `<div class="screen" data-screen="choose">
+    ${topbar("Chọn trạm", { back:"to-start" })}
+    <div class="pad" style="padding-top:0">
+      <h1 style="margin-bottom:8px">Bạn muốn chơi bao nhiêu trạm?</h1>
+      <p class="tiny" style="margin-bottom:4px">Gợi ý cho ${esc(displayName())}, theo mục tiêu và danh hiệu. Chơi thử sẽ đi đúng 6 trạm để xem hết cách chơi.</p>
+      <div class="goal-row">
+        ${GOALS.map(g => `<button class="goal ${state.goalId===g.id?"on":""}" data-act="pick-goal" data-goal="${g.id}">
+          <b>${esc(g.title)}</b>
+          <span>${esc(g.desc)}</span>
+          <em>${state.goalId===g.id?"Đang chọn":`${g.count} trạm · ${esc(g.time)}`}</em>
+        </button>`).join("")}
+      </div>
+      <div class="countbar">
+        <p class="tiny">Danh sách trạm</p>
+        <span class="chip">Đã chọn ${n}/${state.targetCount}</span>
+      </div>
+      ${STATIONS.map(s => {
+        const on = state.selected.includes(s.id);
+        const d = diffOf(s);
+        const tint = { M1:"butter", M2:"peach", M3:"taupe", M4:"sage", M5:"lilac" }[s.mission] || "";
+        return `<button class="station ${s.kind} ${on?"on":""}" data-act="toggle" data-id="${s.id}">
+          <div class="ico">${iconSvg(s.icon, 24)}</div>
+          <div>
+            <h3>${esc(s.name)}</h3>
+            <div class="pills">
+              <span class="pill">${s.kind==="break"?"Check-in":"Trạm thú"}</span>
+              <span class="pill ${tint}">${s.mission} · ${MISSION_NAME[s.mission]}</span>
+              <span class="pill">${diffLabel(d)}</span>
+            </div>
+          </div>
+          <div class="check">${on?"✓":""}</div>
+        </button>`;
+      }).join("")}
+    </div>
+    <div class="sticky">
+      <button class="btn" data-act="to-nav" ${n<3?"disabled":""}>${n<3?"Chọn ít nhất 3 trạm":"Xem đường đi"}</button>
+    </div>
+  </div>`;
+}
+function renderNav() {
+  const next = station(state.nextId);
+  const here = station(state.currentId);
+  if (!next) {
+    return `<div class="screen" data-screen="nav">${topbar("Chỉ đường")}<div class="pad"><p>Không còn trạm nào.</p></div></div>`;
+  }
+  const total = pathLen(state.routePath);
+  const remainU = Math.max(0, total - (state.walkDist || 0));
+  const close = state.arrived || remainU <= ARRIVE;
+  const meters = Math.round(remainU * M_PER_UNIT);
+  const mins = Math.max(1, Math.round(meters / 72));
+  return `<div class="screen nav-screen" data-screen="nav">
+    ${topbar("Chỉ đường", { abs:true })}
+    <div class="map-viewport">${mapSvg({ mode:"nav", vb:`${cam.x} ${cam.y} ${cam.w} ${cam.h}` })}
+      <div class="nav-banner">
+        <div class="turn" id="navTurnIco">↑</div>
+        <p id="navBannerText">${esc(instructionText(state.routePath, state.walkDist || 0, next.name))}</p>
+      </div>
+      <button class="recenter" data-act="recenter" aria-label="Về vị trí của tôi">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+      </button>
+    </div>
+    <div class="nav-sheet">
+      <p class="tiny">Từ ${esc(here ? here.name : "cổng")} · còn ${remaining().length} trạm</p>
+      <h2>${esc(next.name)}</h2>
+      <p class="lead">${esc(next.hint || "")}</p>
+      <div class="pills" style="margin:8px 0 10px">
+        <span class="pill">${next.kind==="break"?"Check-in":"Trạm thú"}</span>
+        <span class="pill">${MISSION_NAME[next.mission]}</span>
+        <span class="pill">${diffLabel(diffOf(next))}</span>
+      </div>
+      <p class="tiny" id="navEta">${close ? "Bạn đang đứng tại trạm" : `${fmtMeters(meters)} · khoảng ${mins} phút đi bộ`}</p>
+      <button class="btn" id="navCta" data-act="arrive-nfc" ${close?"":"hidden"}>Đến nơi rồi, chạm NFC</button>
+      <button class="btn ghost" id="navSkipWalk" style="margin-top:8px" data-act="skip-walk" ${state.walkPaused && !close?"":"hidden"}>Mô phỏng đi tới trạm</button>
+      <p class="tiny" style="margin-top:8px;text-align:center"><button class="chip" data-act="qr" style="border:none;cursor:pointer">Hoặc quét QR</button></p>
+    </div>
+  </div>`;
+}
+
+function renderNfcOverlay() {
+  const s = station(state.nextId);
+  if (!state.nfcBusy || !s) return "";
+  return `<div class="overlay center" data-screen-nfc="1"><div class="modal" style="text-align:center">
+    <div style="width:84px;height:84px;border-radius:50%;background:var(--color-sage);margin:0 auto 12px;display:grid;place-items:center">${iconSvg(s.icon,48)}</div>
+    <h2>Đang chạm NFC</h2>
+    <p class="tiny" style="margin-top:8px">Đưa điện thoại sát thẻ tại ${esc(s.name)}. Bản chạy thử sẽ mở nhiệm vụ ngay.</p>
+  </div></div>`;
+}
+
+function renderMission() {
+  const s = station(state.nextId);
+  if (!s) return `<div class="screen" data-screen="mission"></div>`;
+  const type = missionType(s);
+  const title = MISSION_NAME[type] || "Nhiệm vụ";
+  let body = "";
+  if (type === "M4") {
+    const choices = s.choices || M4_ANIMAL;
+    body = `<p class="lead">${esc(s.prompt)}</p>
+      <div class="choices">
+        ${choices.map((c,i) => `<button class="choice" data-act="choose" data-choice="${c.id}">
+          <span>${["☾","✺","✿","↶"][i] || "•"}</span>${esc(c.t)}
+        </button>`).join("")}
+      </div>`;
+  } else if (type === "M2") {
+    const quiz = s.quiz || { q: s.prompt, answers: [] };
+    body = `<p class="lead">${esc(quiz.q)}</p>
+      <div class="timer" aria-hidden="true"><i id="quizBar"></i></div>
+      <p class="tiny" id="quizTime">Còn 10 giây</p>
+      <div class="choices stack" style="margin-top:12px">
+        ${quiz.answers.map(a => `<button class="choice ${state.quizPicked===a.id?(a.ok?"ok":"bad"):""} ${state.quizLocked && a.ok?"ok":""}" data-act="quiz" data-choice="${a.id}" ${state.quizLocked?"disabled":""}>${esc(a.t)}</button>`).join("")}
+      </div>
+      <p class="tiny" id="quizFeedback" style="min-height:20px;margin-top:8px">${state.quizLocked ? (quiz.answers.some(a=>a.id===state.quizPicked && a.ok) ? "Đúng rồi" : "Đáp án đúng đã được tô xanh") : "Chọn một đáp án, khoảng 10 giây là đủ"}</p>`;
+  } else if (type === "M5") {
+    const idol = s.idol || { name:s.name, species:s.name, dob:"—", fact:"Một cư dân của Thảo Cầm Viên." };
+    body = `<p class="lead">${esc(s.prompt)}</p>
+      <div class="idol-stage">
+        <button class="idol-card ${state.idolOpen?"open":""}" data-act="flip-idol" aria-label="Lật thẻ idol" style="width:100%;border:none;background:none;padding:0;color:inherit">
+          <div class="idol-inner">
+            <div class="idol-face idol-front">
+              ${iconSvg(s.icon, 72)}
+              <h2 style="margin-top:12px">Hồ sơ idol</h2>
+              <p class="tiny" style="margin-top:6px">Chạm để mở thẻ</p>
+            </div>
+            <div class="idol-face idol-back">
+              <p class="tiny">${esc(idol.species)}</p>
+              <h2 style="font-size:28px;margin:8px 0">${esc(idol.name)}</h2>
+              <p class="lead">Sinh ngày ${esc(idol.dob)}</p>
+              <p style="margin-top:14px;line-height:1.45">${esc(idol.fact)}</p>
+            </div>
+          </div>
+        </button>
+      </div>
+      ${state.idolOpen ? `<button class="btn" data-act="finish-idol">Đã xem xong</button>` : ""}`;
+  } else {
+    const frameClass = s.frame === "vintage" ? "vintage" : s.frame === "zen" ? "zen" : "";
+    const cap = state.frameMode === "pair" ? "Frame cặp đôi" : state.frameMode === "group" ? "Frame nhóm" : "Frame một mình";
+    const img = state.photoDraft
+      ? `<img alt="Ảnh vừa chụp" src="${state.photoDraft}"/>`
+      : `<div class="ph">${iconSvg(s.icon, 64)}<div style="margin-top:8px">${esc(s.photoHint || "Chụp một tấm là xong")}</div></div>`;
+    body = `<p class="lead">${esc(s.prompt)}</p>
+      ${type==="M3" ? `<div class="seg">
+        <button data-act="frame" data-mode="solo" class="${state.frameMode==="solo"?"on":""}">Một mình</button>
+        <button data-act="frame" data-mode="pair" class="${state.frameMode==="pair"?"on":""}">Cặp đôi</button>
+        <button data-act="frame" data-mode="group" class="${state.frameMode==="group"?"on":""}">Nhóm</button>
+      </div>` : ""}
+      <div class="viewfinder ${frameClass}">${img}<div class="frame-orn"></div>
+        ${type==="M3" ? `<div class="frame-cap">${esc(cap)} · ${esc(rarityOf(s))}</div>` : ""}
+      </div>
+      <input class="hidden-file" id="shot" type="file" accept="image/*" capture="environment" />
+      <button class="btn cam-btn" data-act="camera">${state.photoDraft ? "Chụp lại" : "Chụp một tấm"}</button>
+      ${state.photoDraft ? `<button class="btn ghost" style="margin-top:10px" data-act="finish-photo">Xong</button>` : ""}
+      <button class="btn ghost" style="margin-top:10px" data-act="fallback">Không thấy? Quan sát thay</button>`;
+  }
+  return `<div class="screen" data-screen="mission" data-mission="${type}">
+    ${topbar(title)}
+    <div class="pad">
+      <span class="chip peach">Bạn đang ở đây · ${esc(s.name)}</span>
+      <h1 style="margin:12px 0 8px">${esc(title)}</h1>
+      ${body}
+    </div>
+  </div>`;
+}
+
+function choiceCaption(c) {
+  if (!c.choice) return "";
+  if (c.choice === "timeout") return " · hết giờ";
+  const s = station(c.id);
+  const pool = [...(s && s.choices || []), ...M4_ANIMAL, ...((s && s.quiz && s.quiz.answers) || [])];
+  const found = pool.find(x => x.id === c.choice);
+  return found ? " · " + esc(found.t) : "";
+}
+function computeTitle() {
+  const ids = state.completed.map(c => c.id);
+  if (ids.includes("duoiuoi")) return "Thánh săn đười ươi";
+  if (ids.includes("b2") && ids.filter(id => station(id).mission === "M3").length >= 2) return "Tín đồ sống ảo";
+  if (state.completed.length >= 12) return "Nhà thám hiểm";
+  if (state.desiredTitle && state.desiredTitle !== "Chơi thử") return state.desiredTitle;
+  const types = new Set(state.completed.map(c => c.mission));
+  if (types.size >= 5) return "Nhà sưu tầm nhiệm vụ";
+  return "Người khám phá";
+}
+function rankInfo() {
+  const mail = state.user.email || "ban";
+  const seed = (mail.length * 7 + state.completed.length * 13 + (mail.charCodeAt(0) || 1)) % 40;
+  return { rank: 12 + seed, total: 148 + ((mail.charCodeAt(0) || 1) % 28) };
+}
+function typeBreakdown() {
+  const counts = { M1:0, M2:0, M3:0, M4:0, M5:0, break:0 };
+  for (const c of state.completed) {
+    const s = station(c.id);
+    if (s && s.kind === "break") counts.break++;
+    counts[c.mission] = (counts[c.mission] || 0) + 1;
+  }
+  const total = Math.max(1, state.completed.length);
+  const colors = { M1:"var(--color-butter)", M2:"var(--color-peach)", M3:"var(--color-brown)", M4:"var(--color-olive)", M5:"var(--color-lilac)", break:"var(--color-accent)" };
+  const labels = { M1:"Tìm thấy", M2:"Đoán nhanh", M3:"Bắt chước", M4:"Quan sát", M5:"Hồ sơ", break:"Check-in" };
+  return ["M4","M2","M1","M3","M5"].map(k => ({
+    key:k, label:labels[k], pct: Math.round((counts[k] || 0) / total * 100), color: colors[k],
+  })).filter(x => x.pct > 0 || state.completed.some(c => c.mission === x.key));
+}
+
+function secretIdolUnlocked() {
+  return state.completed.some(c => c.id === "duoiuoi") || state.completed.length >= 6;
+}
+
+function downloadIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+function cameraIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.2" y="6.2" width="17.6" height="13.2" rx="3.2" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12.8" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M8.4 6.2 9.6 4.2h4.8l1.2 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+function shareActions(kind) {
+  return `<div class="share-actions">
+    <button class="btn ghost sm" type="button" data-act="save-scene" data-scene="${kind}">${downloadIcon()} Tải ảnh</button>
+    <button class="btn ghost sm" type="button" data-act="share-ig" data-scene="${kind}">${cameraIcon()} Chia sẻ lên Instagram</button>
+  </div>`;
+}
+function storyFilename(kind) {
+  return ({
+    title: "choo-zoo-danh-hieu.png",
+    ranking: "choo-zoo-xep-hang.png",
+    frame: "choo-zoo-frame.png",
+  })[kind] || "choo-zoo.png";
+}
+function fillRoundRect(ctx, x, y, w, h, r, color) {
+  ctx.fillStyle = color;
+  roundRect(ctx, x, y, w, h, r);
+  ctx.fill();
+}
+function canvasToBlob(canvas) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(b => b ? resolve(b) : reject(new Error("blob")), "image/png");
+  });
+}
+function triggerDownload(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2500);
+}
+function lastPhoto() {
+  const photos = (state.completed || []).map(x => x.photo).filter(Boolean);
+  return photos[photos.length - 1] || "";
+}
+function todayLabel() {
+  return new Date().toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Asia/Saigon" });
+}
+async function waitFonts() {
+  if (!(document.fonts && document.fonts.ready)) return;
+  try {
+    await Promise.race([
+      Promise.all([
+        document.fonts.load('800 72px "Be Vietnam Pro"'),
+        document.fonts.load('600 28px "Be Vietnam Pro"'),
+        document.fonts.load('500 24px "Be Vietnam Pro"'),
+        document.fonts.ready,
+      ]),
+      new Promise(r => setTimeout(r, 2500)),
+    ]);
+  } catch (e) {}
+}
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error("img"));
+    img.src = src;
+  });
+}
+async function makeStoryCanvas(kind) {
+  await waitFonts();
+  const W = 1080, H = 1920;
+  const c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  const ctx = c.getContext("2d");
+  ctx.fillStyle = "#F1F0EC";
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = "#F0D5CC";
+  ctx.beginPath(); ctx.arc(930, 160, 230, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = "#D3DEC4";
+  ctx.beginPath(); ctx.arc(70, 1720, 280, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = "#E0D4EE";
+  ctx.beginPath(); ctx.arc(990, 1540, 190, 0, Math.PI * 2); ctx.fill();
+
+  fillRoundRect(ctx, 80, 84, 340, 56, 28, "#E8C75A");
+  ctx.fillStyle = "#1C1B19";
+  ctx.font = '600 24px "Be Vietnam Pro", sans-serif';
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("Thảo Cầm Viên", 250, 113);
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+  ctx.font = '800 72px "Be Vietnam Pro", sans-serif';
+  ctx.fillText("Choo Zoo", 80, 230);
+
+  const who = displayName();
+  const title = computeTitle();
+  const rank = rankInfo();
+  const HEX = { M1: "#E8C75A", M2: "#F0D5CC", M3: "#7A5340", M4: "#6B7F45", M5: "#E0D4EE" };
+
+  if (kind === "title") {
+    ctx.font = '500 28px "Be Vietnam Pro", sans-serif';
+    ctx.fillStyle = "#4A4640";
+    ctx.fillText("Danh hiệu của " + who, 80, 320);
+    fillRoundRect(ctx, 80, 380, 920, 180, 90, "#E0D4EE");
+    ctx.fillStyle = "#1C1B19";
+    ctx.font = '800 46px "Be Vietnam Pro", sans-serif';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(title, 540, 470);
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    if (secretIdolUnlocked()) {
+      fillRoundRect(ctx, 80, 620, 920, 300, 36, "#E8C75A");
+      ctx.font = '600 22px "Be Vietnam Pro", sans-serif';
+      ctx.fillStyle = "#4A4640";
+      ctx.fillText("Thẻ idol bí mật", 130, 690);
+      ctx.fillStyle = "#1C1B19";
+      ctx.font = '800 48px "Be Vietnam Pro", sans-serif';
+      ctx.fillText("Em Trò", 130, 760);
+      ctx.font = '500 26px "Be Vietnam Pro", sans-serif';
+      ctx.fillText("Đười ươi  ·  16.08.2006", 130, 812);
+      ctx.fillText("Hay trèo cao nhìn người qua đường.", 130, 858);
+    }
+  } else if (kind === "ranking") {
+    ctx.font = '500 28px "Be Vietnam Pro", sans-serif';
+    ctx.fillStyle = "#4A4640";
+    ctx.fillText("Hạng hôm nay", 80, 320);
+    ctx.fillStyle = "#1C1B19";
+    ctx.font = '800 150px "Be Vietnam Pro", sans-serif';
+    ctx.fillText("#" + rank.rank, 80, 500);
+    ctx.font = '500 32px "Be Vietnam Pro", sans-serif';
+    ctx.fillStyle = "#4A4640";
+    ctx.fillText("trên " + rank.total + " người chơi", 80, 568);
+    fillRoundRect(ctx, 80, 640, 920, 760, 40, "#FFFFFF");
+    ctx.fillStyle = "#1C1B19";
+    ctx.font = '800 34px "Be Vietnam Pro", sans-serif';
+    ctx.fillText("Hành trình hôm nay", 130, 710);
+    const bars = typeBreakdown();
+    const barW = 86;
+    const usable = 800;
+    const gap = bars.length > 1 ? (usable - bars.length * barW) / (bars.length - 1) : 0;
+    bars.forEach((b, i) => {
+      const x = 140 + i * (barW + gap);
+      const trackH = 440;
+      const trackY = 760;
+      fillRoundRect(ctx, x, trackY, barW, trackH, 40, "#F3F1ED");
+      const fh = Math.max(40, trackH * (b.pct / 100));
+      fillRoundRect(ctx, x, trackY + trackH - fh, barW, fh, 40, HEX[b.key] || "#E0B034");
+      ctx.fillStyle = "#1C1B19";
+      ctx.textAlign = "center";
+      ctx.font = '700 22px "Be Vietnam Pro", sans-serif';
+      ctx.fillText(b.pct + "%", x + barW / 2, trackY + trackH + 42);
+      ctx.font = '600 20px "Be Vietnam Pro", sans-serif';
+      ctx.fillText(b.label, x + barW / 2, trackY + trackH + 72);
+    });
+    ctx.textAlign = "left";
+  } else if (kind === "frame") {
+    fillRoundRect(ctx, 80, 300, 920, 1280, 40, "#FFFFFF");
+    ctx.fillStyle = "#E8C75A";
+    ctx.beginPath();
+    roundRect(ctx, 80, 300, 920, 190, 40);
+    ctx.fill();
+    ctx.fillRect(80, 430, 920, 60);
+    ctx.fillStyle = "#1C1B19";
+    ctx.font = '800 56px "Be Vietnam Pro", sans-serif';
+    ctx.fillText("Choo Zoo", 124, 400);
+    ctx.font = '600 24px "Be Vietnam Pro", sans-serif';
+    ctx.fillText("Thảo Cầm Viên Sài Gòn", 128, 446);
+    const px = 130, py = 540, pw = 820, ph = 720;
+    fillRoundRect(ctx, px, py, pw, ph, 32, "#D2C8BA");
+    const photo = lastPhoto();
+    if (photo) {
+      try {
+        const img = await loadImage(photo);
+        ctx.save();
+        roundRect(ctx, px, py, pw, ph, 32);
+        ctx.clip();
+        const s = Math.max(pw / img.width, ph / img.height);
+        const dw = img.width * s, dh = img.height * s;
+        ctx.drawImage(img, px + (pw - dw) / 2, py + (ph - dh) / 2, dw, dh);
+        ctx.restore();
+      } catch (e) {}
+    } else {
+      ctx.fillStyle = "#4A4640";
+      ctx.font = '600 32px "Be Vietnam Pro", sans-serif';
+      ctx.textAlign = "center";
+      ctx.fillText("Hành trình Thảo Cầm Viên", 540, 900);
+      ctx.textAlign = "left";
+    }
+    ctx.fillStyle = "#1C1B19";
+    ctx.font = '600 26px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(who, 130, 1330);
+    ctx.font = '800 42px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(title, 130, 1390);
+    ctx.fillStyle = "#4A4640";
+    ctx.font = '500 24px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(state.completed.length + " trạm  ·  " + todayLabel(), 130, 1440);
+    const names = state.completed.map(x => station(x.id).short);
+    let line = "", yNames = 1484;
+    names.forEach((n, i) => {
+      const next = line ? line + "  ·  " + n : n;
+      if (ctx.measureText(next).width > 780 && line) {
+        ctx.fillText(line, 130, yNames);
+        yNames += 36;
+        line = n;
+      } else line = next;
+    });
+    if (line) ctx.fillText(line, 130, yNames);
+    fillRoundRect(ctx, 700, 1310, 240, 64, 32, "#E0B034");
+    ctx.fillStyle = "#1C1B19";
+    ctx.font = '800 24px "Be Vietnam Pro", sans-serif';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    const last = state.completed[state.completed.length - 1];
+    ctx.fillText(last ? rarityOf(station(last.id)) : "Thường", 820, 1342);
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+  }
+
+  ctx.fillStyle = "#4A4640";
+  ctx.font = '500 22px "Be Vietnam Pro", sans-serif';
+  ctx.fillText(who + "  ·  Choo Zoo", 80, 1848);
+  ctx.fillText(todayLabel(), 80, 1884);
+  return c;
+}
+async function saveStory(kind, mode) {
+  try {
+    const canvas = await makeStoryCanvas(kind);
+    const blob = await canvasToBlob(canvas);
+    const file = new File([blob], storyFilename(kind), { type: "image/png" });
+    if (mode === "download") {
+      triggerDownload(blob, file.name);
+      toast("Đã lưu ảnh về máy");
+      return;
+    }
+    const canFiles = !!(navigator.canShare && navigator.canShare({ files: [file] }));
+    if (navigator.share && canFiles) {
+      try {
+        await navigator.share({
+          files: [file],
+          title: "Choo Zoo",
+          text: "Hành trình của mình ở Thảo Cầm Viên",
+        });
+        return;
+      } catch (err) {
+        if (err && err.name === "AbortError") return;
+      }
+    }
+    state.shareSheet = kind;
+    save();
+    render();
+  } catch (e) {
+    console.error(e);
+    toast("Chưa tạo được ảnh, thử lại nha");
+  }
+}
+async function finishSharePick(dest) {
+  const kind = state.shareSheet || "title";
+  state.shareSheet = "";
+  save();
+  render();
+  try {
+    const canvas = await makeStoryCanvas(kind);
+    const blob = await canvasToBlob(canvas);
+    triggerDownload(blob, storyFilename(kind));
+  } catch (e) {}
+  if (dest === "save") {
+    toast("Đã lưu ảnh về máy");
+    return;
+  }
+  try {
+    window.open(dest === "stories" ? "instagram://story-camera" : "instagram://app", "_blank", "noopener");
+  } catch (e) {}
+  setTimeout(() => {
+    try { window.open("https://www.instagram.com/", "_blank", "noopener"); } catch (e) {}
+  }, 280);
+  toast("Ảnh đã lưu. Mở Instagram, chọn tin hoặc bài viết mới, rồi chọn ảnh vừa tải");
+}
+
+function renderFinale() {
+  const step = state.finaleStep || 0;
+  const title = computeTitle();
+  const rank = rankInfo();
+  const who = displayName();
+  let inner = "";
+  if (step === 0) {
+    inner = `<div class="finale-card" data-finale="congrats">
+      <p class="tiny">Hành trình của ${esc(who)}</p>
+      <div class="display" style="margin:10px 0 6px">${state.completed.length}</div>
+      <h1>Xong rồi đó</h1>
+      <p class="lead" style="margin-top:10px">Bạn đã hoàn thành ${state.completed.length} trạm tại Thảo Cầm Viên.</p>
+      <button class="btn" style="margin-top:22px" data-act="finale-next">Xem hành trình</button>
+    </div>`;
+  } else if (step === 1) {
+    inner = `<div class="finale-card wide" data-finale="journey">
+      <h1>Hành trình đã đi</h1>
+      <p class="lead" style="margin:8px 0 4px">Từng trạm bạn vừa ghé.</p>
+      <div class="minimap">${mapSvg({ mode:"wrap" })}</div>
+      <ol class="timeline">
+        ${state.completed.map(c => {
+          const s = station(c.id);
+          return `<li>
+            <div class="dot">${iconSvg(s.icon, 20)}</div>
+            <div><b>${esc(s.name)}</b><div class="tiny">${MISSION_NAME[c.mission] || c.mission}${choiceCaption(c)}</div></div>
+          </li>`;
+        }).join("")}
+      </ol>
+      <button class="btn" style="margin-top:8px" data-act="finale-next">Xem danh hiệu</button>
+    </div>`;
+  } else if (step === 2) {
+    inner = `<div class="finale-card" data-finale="title">
+      <p class="tiny">Danh hiệu của ${esc(who)}</p>
+      <div class="title-pill">${esc(title)}</div>
+      <p class="lead" style="margin-top:12px">Mang danh hiệu này trên frame kỷ niệm khi rời vườn.</p>
+      ${secretIdolUnlocked() ? `<div class="secret">
+        <div>${iconSvg("orang", 40)}</div>
+        <div>
+          <div class="tiny">Thẻ idol bí mật</div>
+          <h3 style="font-size:18px">Em Trò</h3>
+          <p class="tiny">Đười ươi · 16.08.2006<br/>Hay trèo cao nhìn người qua đường.</p>
+        </div>
+      </div>` : ""}
+      <button class="btn" style="margin-top:20px" data-act="finale-next">Xem xếp hạng</button>
+      ${shareActions("title")}
+    </div>`;
+  } else if (step === 3) {
+    const bars = typeBreakdown();
+    inner = `<div class="finale-card wide" data-finale="ranking">
+      <p class="tiny">Hạng hôm nay</p>
+      <div class="display" style="font-size:56px;text-align:center">#${rank.rank}</div>
+      <p class="lead" style="text-align:center">trên ${rank.total} người chơi</p>
+      <h3 style="margin-top:16px">Hành trình hôm nay</h3>
+      <div class="bars">
+        ${bars.map(b => `<div class="col">
+          <div class="track"><div class="fill" style="height:${Math.max(12,b.pct)}%;background:${b.color}"></div></div>
+          <label>${b.pct}%<br/>${esc(b.label)}</label>
+        </div>`).join("")}
+      </div>
+      <button class="btn" data-act="finale-next">Nhận frame ảnh</button>
+      ${shareActions("ranking")}
+    </div>`;
+  } else if (step === 4) {
+    inner = `<div class="finale-card" data-finale="frame">
+      <h1>Frame kỷ niệm</h1>
+      <p class="lead" style="margin:8px 0 14px">Tải về máy để giữ lại vòng đi hôm nay.</p>
+      <canvas id="frameCanvas" width="360" height="450" style="width:168px;height:210px;display:block;margin:0 auto;border-radius:18px;box-shadow:var(--shadow-card)"></canvas>
+      <button class="btn" style="margin-top:16px" data-act="finale-next">Kết thúc</button>
+      ${shareActions("frame")}
+    </div>`;
+  } else {
+    inner = `<div class="finale-card" data-finale="end">
+      <h1>Hẹn gặp lại ở Thảo Cầm Viên</h1>
+      <p class="lead" style="margin-top:12px">Tiến độ trên máy này có thể xóa để chơi vòng mới.</p>
+      <button class="btn" style="margin-top:22px" data-act="replay">Chơi lại từ đầu</button>
+    </div>`;
+  }
+  const confetti = step === 0 ? `<div class="confetti" aria-hidden="true">${Array.from({length:22}, (_,i) => {
+    const cols = ["#E0B034","#F0D5CC","#E0D4EE","#D3DEC4","#E8C75A","#D2C8BA"];
+    return `<i style="left:${4+i*4.4}%;animation-delay:${(i%8)*0.09}s;background:${cols[i%cols.length]}"></i>`;
+  }).join("")}</div>` : "";
+  return `<div class="screen finale" data-screen="finale" data-step="${step}">
+    ${topbar("Tổng kết")}
+    ${confetti}
+    ${inner}
+  </div>`;
+}
+
+function overlays() {
+  let html = "";
+  html += renderNfcOverlay();
+  if (state.shareSheet) {
+    html += `<div class="overlay sheet" data-act="close-share">
+      <div class="share-sheet" data-share-sheet="${state.shareSheet}" onclick="if (!event.target.closest('[data-act]')) event.stopPropagation()">
+        <div class="grab"></div>
+        <h3>Chia sẻ lên Instagram</h3>
+        <p class="muted">Chọn nơi muốn đăng, hoặc lưu ảnh về máy</p>
+        <button class="share-opt" type="button" data-act="share-pick" data-dest="stories">
+          <span class="glyph">${cameraIcon()}</span>
+          <span><strong>Instagram Stories</strong><em>Đăng ảnh như một tin 24 giờ</em></span>
+        </button>
+        <button class="share-opt" type="button" data-act="share-pick" data-dest="feed">
+          <span class="glyph">${cameraIcon()}</span>
+          <span><strong>Instagram Feed</strong><em>Đăng lên trang cá nhân</em></span>
+        </button>
+        <button class="share-opt" type="button" data-act="share-pick" data-dest="save">
+          <span class="glyph save">${downloadIcon()}</span>
+          <span><strong>Lưu về máy</strong><em>Tải ảnh rồi tự đăng sau</em></span>
+        </button>
+      </div>
+    </div>`;
+  }
+  if (state.help || state.showHowto) {
+    html += `<div class="overlay" data-act="close-help"><div class="modal" onclick="event.stopPropagation()">
+      <h2>Cách chơi</h2>
+      <ol class="howto">
+        <li>Chọn số nhiệm vụ và các trạm muốn ghé.</li>
+        <li>Theo đường chỉ dẫn trên map, giống khi đi bộ với bản đồ.</li>
+        <li>Chạm NFC hoặc quét QR tại trạm để mở nhiệm vụ.</li>
+        <li>Làm xong, map dẫn tới trạm gần nhất còn lại.</li>
+      </ol>
+      <p class="tiny" style="margin-bottom:14px">Một tay là đủ. Có năm mẫu: tìm và chụp, đoán nhanh, bắt chước, quan sát, và mở hồ sơ idol. Không thấy thú thì dùng Quan sát.</p>
+      <button class="btn" data-act="close-help">Đã hiểu</button>
+    </div></div>`;
+  }
+  if (state.paused) {
+    html += `<div class="overlay center"><div class="modal">
+      <h2>Đang tạm dừng</h2>
+      <p class="lead" style="margin:10px 0 16px">Tiến độ đã lưu trên máy này. Tắt máy hay đổi tab vẫn quay lại được.</p>
+      <button class="btn" data-act="resume">Tiếp tục</button>
+      <button class="btn ghost" style="margin-top:10px" data-act="reset">Thoát và xóa tiến độ</button>
+    </div></div>`;
+  }
+  return html;
+}
+
+function render() {
+  const toastEl = $("#toast");
+  if (toastEl) toastEl.style.display = "none";
+  if (state.screen !== "nav") stopNavRuntime();
+  if (state.screen === "nav") ensureRoute();
+  const root = $("#app");
+  root.classList.remove("is-leaving");
+  let html = "";
+  switch (state.screen) {
+    case "login": html = renderLogin(); break;
+    case "profile": html = renderProfile(); break;
+    case "start": html = renderStart(); break;
+    case "map": html = renderMapPreview(); break;
+    case "choose": html = renderChoose(); break;
+    case "nav": html = renderNav(); break;
+    case "mission": html = renderMission(); break;
+    case "finale": html = renderFinale(); break;
+    default: html = renderLogin();
+  }
+  root.innerHTML = html + overlays();
+  if (state.screen === "nav") startNavRuntime();
+  if (state.screen === "finale" && state.finaleStep === 4) drawFrame(false);
+  if (state.screen === "finale") armFinaleAdvance();
+  if (state.screen === "mission" && missionType(station(state.nextId) || {}) === "M2") startQuizTimer();
+  bind();
+}
+
+function openMission() {
+  state.fallbackM4 = false;
+  state.photoDraft = null;
+  state.frameMode = "solo";
+  state.idolOpen = false;
+  state.quizLocked = false;
+  state.quizPicked = null;
+  state.nfcBusy = false;
+  go("mission");
+}
+
+function completeMission(extra={}) {
+  const id = state.nextId;
+  const s = station(id);
+  if (!s) return;
+  if (!state.completed.some(c => c.id === id)) {
+    state.completed.push({
+      id, mission: extra.mission || missionType(s),
+      choice: extra.choice || null,
+      photo: extra.photo || state.photoDraft || null,
+      frameMode: state.frameMode,
+      at: Date.now(),
+    });
+  }
+  if (state.routePath && state.routePath.length) {
+    state.trail = (state.trail || []).concat(state.routePath);
+  }
+  state.currentId = id;
+  state.photoDraft = null;
+  state.fallbackM4 = false;
+  state.idolOpen = false;
+  state.quizLocked = false;
+  const nxt = nextInPlan(id);
+  if (!nxt) {
+    state.finaleStep = 0;
+    go("finale");
+    return;
+  }
+  state.nextId = nxt;
+  state.routeKey = "";
+  go("nav");
+  const ns = station(nxt);
+  if (ns) toast("Trạm tiếp theo: " + ns.name + " · " + MISSION_NAME[ns.mission]);
+}
+
+function simulatePhoto(s) {
+  const c = document.createElement("canvas");
+  c.width = 720; c.height = 900;
+  const ctx = c.getContext("2d");
+  const g = ctx.createLinearGradient(0,0,0,900);
+  g.addColorStop(0, "#E8C75A");
+  g.addColorStop(1, "#D3DEC4");
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,720,900);
+  ctx.fillStyle = "rgba(28,27,25,.08)";
+  ctx.beginPath(); ctx.arc(360, 380, 160, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#1C1B19";
+  ctx.font = '700 36px "Be Vietnam Pro", sans-serif';
+  ctx.textAlign = "center";
+  ctx.fillText(s.name, 360, 640);
+  ctx.font = '500 22px "Be Vietnam Pro", sans-serif';
+  ctx.fillText("Choo Zoo · bản chạy thử", 360, 680);
+  return c.toDataURL("image/jpeg", 0.72);
+}
+
+function startQuizTimer() {
+  clearInterval(startQuizTimer._id);
+  if (state.quizLocked) return;
+  if (!state.quizDeadline || state.quizDeadline < Date.now()) state.quizDeadline = Date.now() + 10000;
+  const tick = () => {
+    const bar = $("#quizBar");
+    const label = $("#quizTime");
+    const left = Math.max(0, state.quizDeadline - Date.now());
+    const pct = left / 10000;
+    if (bar) bar.style.transform = `scaleX(${pct})`;
+    if (label) label.textContent = left <= 0 ? "Hết giờ rồi" : `Còn ${Math.ceil(left/1000)} giây`;
+    if (left <= 0 && !state.quizLocked) {
+      clearInterval(startQuizTimer._id);
+      finishQuiz(null);
+    }
+  };
+  tick();
+  startQuizTimer._id = setInterval(tick, 100);
+}
+
+function finishQuiz(choiceId) {
+  if (state.quizLocked) return;
+  const s = station(state.nextId);
+  const quiz = s && s.quiz;
+  state.quizLocked = true;
+  state.quizPicked = choiceId;
+  clearInterval(startQuizTimer._id);
+  save();
+  render();
+  setTimeout(() => completeMission({ mission:"M2", choice: choiceId || "timeout" }), 1100);
+}
+
+let finaleTimer = 0;
+function armFinaleAdvance() {
+  clearTimeout(finaleTimer);
+  if (state.screen !== "finale") return;
+  if (state.shareSheet) return;
+  if (state.finaleStep >= 2) return;
+  finaleTimer = setTimeout(() => {
+    if (state.screen !== "finale") return;
+    if (state.shareSheet) return;
+    state.finaleStep = (state.finaleStep || 0) + 1;
+    save(); render();
+  }, 4500);
+}
+
+function drawFrame(download) {
+  const canvas = $("#frameCanvas");
+  if (!canvas) return;
+  const paint = () => drawFrameNow(download);
+  if (document.fonts && document.fonts.status !== "loaded") {
+    document.fonts.ready.then(paint).catch(paint);
+    return;
+  }
+  paint();
+}
+function drawFrameNow(download) {
+  const canvas = $("#frameCanvas");
+  if (!canvas) return;
+  const c = document.createElement("canvas");
+  c.width = 1080; c.height = 1350;
+  const ctx = c.getContext("2d");
+  ctx.fillStyle = "#F1F0EC";
+  ctx.fillRect(0,0,1080,1350);
+  ctx.fillStyle = "#E8C75A";
+  ctx.fillRect(0,0,1080,220);
+  ctx.fillStyle = "#1C1B19";
+  ctx.font = '800 72px "Be Vietnam Pro", sans-serif';
+  ctx.fillText("Choo Zoo", 80, 130);
+  ctx.font = '600 28px "Be Vietnam Pro", sans-serif';
+  ctx.fillText("Thảo Cầm Viên Sài Gòn", 82, 176);
+
+  const photos = state.completed.map(x => x.photo).filter(Boolean);
+  const px = 80, py = 260, pw = 920, ph = 700;
+  ctx.fillStyle = "#D2C8BA";
+  roundRect(ctx, px, py, pw, ph, 36); ctx.fill();
+
+  const paintPhoto = () => {
+    ctx.fillStyle = "#1C1B19";
+    ctx.font = '600 26px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(displayName(), 80, 1018);
+    ctx.font = '700 42px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(computeTitle(), 80, 1068);
+    ctx.font = '500 26px "Be Vietnam Pro", sans-serif';
+    ctx.fillStyle = "#4A4640";
+    ctx.fillText(state.completed.length + " trạm · " + new Date().toLocaleDateString("vi-VN", { timeZone: "Asia/Saigon" }), 80, 1090);
+    ctx.fillText(state.completed.map(x => station(x.id).short).join("  ·  "), 80, 1136);
+    ctx.fillStyle = "#E0B034";
+    roundRect(ctx, 760, 1008, 240, 64, 32); ctx.fill();
+    ctx.fillStyle = "#1C1B19";
+    ctx.font = '800 26px "Be Vietnam Pro", sans-serif';
+    const last = state.completed[state.completed.length-1];
+    const rare = last ? rarityOf(station(last.id)) : "Thường";
+    ctx.fillText(rare, 820, 1050);
+    ctx.font = '600 22px "Be Vietnam Pro", sans-serif';
+    ctx.fillText("Bản chạy thử Choo Zoo", 80, 1268);
+
+    const view = $("#frameCanvas");
+    if (!view) return;
+    const vctx = view.getContext("2d");
+    vctx.drawImage(c, 0, 0, view.width, view.height);
+    if (download) {
+      const a = document.createElement("a");
+      a.href = c.toDataURL("image/png");
+      a.download = "choo-zoo-frame.png";
+      a.click();
+    }
+  };
+
+  if (photos.length) {
+    const img = new Image();
+    img.onload = () => {
+      ctx.save();
+      roundRect(ctx, px, py, pw, ph, 36); ctx.clip();
+      ctx.drawImage(img, px, py, pw, ph);
+      ctx.restore();
+      paintPhoto();
+    };
+    img.onerror = paintPhoto;
+    img.src = photos[photos.length-1];
+  } else {
+    ctx.fillStyle = "#4A4640";
+    ctx.font = '600 34px "Be Vietnam Pro", sans-serif';
+    ctx.textAlign = "center";
+    ctx.fillText("Hành trình Thảo Cầm Viên", 540, 580);
+    ctx.fillText(state.completed.map(x => station(x.id).short).slice(0,6).join("   "), 540, 640);
+    ctx.textAlign = "left";
+    paintPhoto();
+  }
+}
+function roundRect(ctx,x,y,w,h,r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+
+function beginJourney() {
+  go("choose");
+}
+function startNavFromChoose() {
+  if (state.selected.length < 3) return;
+  state.currentId = "b1";
+  state.trail = [];
+  state.completed = state.completed || [];
+  const first = nextInPlan("b1");
+  state.nextId = first;
+  state.routeKey = "";
+  state.userPos = { x: 200, y: 472 };
+  go("nav");
+}
+
+function showNfcThenMission() {
+  state.nfcBusy = true;
+  save();
+  render();
+  setTimeout(() => { state.nfcBusy = false; openMission(); }, 720);
+}
+
+function bind() {
+  const root = $("#app");
+  root.onclick = (e) => {
+    const btn = e.target.closest("[data-act]");
+    if (!btn) return;
+    const act = btn.dataset.act;
+    if (act === "send-link") {
+      const email = ($("#email")?.value || "").trim();
+      state.user.email = email;
+      if (!validEmail(email)) { toast("Mail chưa đúng định dạng"); return; }
+      toast("Đã gửi link tới " + email);
+      go("profile");
+      return;
+    }
+    if (act === "back-login") { go("login"); return; }
+    if (act === "save-profile") {
+      const name = ($("#uname")?.value || "").trim();
+      const d = $("#dob-d")?.value || "";
+      const mo = $("#dob-m")?.value || "";
+      const y = $("#dob-y")?.value || "";
+      if (!name) { toast("Cho em biết bạn muốn được gọi là gì"); return; }
+      if (!isValidDob(y, mo, d)) { toast("Ngày sinh chưa đúng, chọn ngày / tháng / năm nha"); return; }
+      state.user.name = name;
+      state.user.dob = `${y}-${String(mo).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+      save();
+      go("start");
+      return;
+    }
+    if (act === "begin" || act === "noop") { if (act === "begin") beginJourney(); return; }
+    if (act === "to-start") { go("start"); return; }
+    if (act === "to-map") { go("map"); return; }
+    if (act === "howto") { state.showHowto = true; save(); render(); return; }
+    if (act === "play-demo") {
+      const g = GOALS[0];
+      state.goalId = g.id;
+      state.targetCount = g.count;
+      state.desiredTitle = g.title;
+      state.selected = g.pick.slice();
+      go("choose");
+      return;
+    }
+    if (act === "pick-goal") {
+      const g = GOALS.find(x => x.id === btn.dataset.goal);
+      if (!g) return;
+      state.goalId = g.id;
+      state.targetCount = g.count;
+      state.desiredTitle = g.title;
+      state.selected = g.pick.slice();
+      save(); render();
+      return;
+    }
+    if (act === "toggle") {
+      const id = btn.dataset.id;
+      if (state.selected.includes(id)) state.selected = state.selected.filter(x => x !== id);
+      else state.selected.push(id);
+      save(); render();
+      return;
+    }
+    if (act === "to-nav") { startNavFromChoose(); return; }
+    if (act === "recenter") {
+      state.camMode = "follow";
+      camTarget = targetCam();
+      return;
+    }
+    if (act === "arrive-nfc" || act === "qr") {
+      if (act === "qr") toast("QR giả lập, mở nhiệm vụ");
+      const total = pathLen(state.routePath);
+      const remainU = Math.max(0, total - (state.walkDist || 0));
+      if (!state.arrived && remainU > 25 && act !== "qr") return;
+      showNfcThenMission();
+      return;
+    }
+    if (act === "skip-walk") {
+      const total = pathLen(state.routePath);
+      state.walkDist = total;
+      state.arrived = true;
+      const dest = station(state.nextId);
+      if (dest) state.userPos = { x: dest.x, y: dest.y };
+      state.walkPaused = false;
+      paintNav();
+      return;
+    }
+    if (act === "choose") {
+      completeMission({ mission: "M4", choice: btn.dataset.choice });
+      return;
+    }
+    if (act === "quiz") {
+      finishQuiz(btn.dataset.choice);
+      return;
+    }
+    if (act === "flip-idol") {
+      state.idolOpen = true; save(); render(); return;
+    }
+    if (act === "finish-idol") {
+      completeMission({ mission: "M5" }); return;
+    }
+    if (act === "camera") {
+      const s = station(state.nextId);
+      state.photoDraft = simulatePhoto(s);
+      save(); render();
+      const input = $("#shot");
+      if (input) input.value = "";
+      return;
+    }
+    if (act === "finish-photo") {
+      completeMission({ photo: state.photoDraft });
+      return;
+    }
+    if (act === "fallback") {
+      state.fallbackM4 = true;
+      state.photoDraft = null;
+      save(); render();
+      return;
+    }
+    if (act === "frame") {
+      state.frameMode = btn.dataset.mode;
+      save(); render();
+      return;
+    }
+    if (act === "help") { state.help = true; save(); render(); return; }
+    if (act === "close-help") { state.help = false; state.showHowto = false; save(); render(); return; }
+    if (act === "pause") { state.paused = true; save(); render(); return; }
+    if (act === "resume") { state.paused = false; save(); render(); return; }
+    if (act === "reset") { stopNavRuntime(); state = defaultState(); save(); render(); return; }
+    if (act === "download") { drawFrame(true); return; }
+    if (act === "save-scene") { saveStory(btn.dataset.scene, "download"); return; }
+    if (act === "share-ig") { saveStory(btn.dataset.scene, "share"); return; }
+    if (act === "close-share") { state.shareSheet = ""; save(); render(); return; }
+    if (act === "share-pick") { finishSharePick(btn.dataset.dest); return; }
+    if (act === "replay") { stopNavRuntime(); state = defaultState(); save(); render(); return; }
+    if (act === "finale-next") {
+      state.shareSheet = "";
+      state.finaleStep = Math.min(5, (state.finaleStep || 0) + 1);
+      save(); render();
+      return;
+    }
+  };
+
+  const file = $("#shot");
+  if (file) {
+    file.onchange = () => {
+      const f = file.files && file.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = () => { state.photoDraft = r.result; save(); render(); };
+      r.readAsDataURL(f);
+    };
+  }
+}
+
+window.__CHOO = {
+  getState: () => state,
+  reset() { stopNavRuntime(); state = defaultState(); save(); render(); },
+  go,
+  station,
+  STATIONS,
+  GOALS,
+  DEMO_ORDER,
+  pathTo: (a,b) => shortestPath(a,b),
+  verifyGraph,
+  setWalkRatio(t) {
+    const total = pathLen(state.routePath);
+    state.walkDist = Math.max(0, Math.min(total, total * t));
+    state.arrived = (total - state.walkDist) <= ARRIVE;
+    const pos = pointAlong(state.routePath, state.walkDist);
+    state.userPos = { x: pos.x, y: pos.y };
+    state.heading = pos.heading;
+    state.walkSpeed = 0;
+    paintNav();
+  },
+  pauseWalk() { state.walkPaused = true; },
+  resumeWalk() { state.walkPaused = false; },
+  arriveNow() {
+    const total = pathLen(state.routePath);
+    state.walkDist = total;
+    state.arrived = true;
+    state.walkSpeed = WALK_SPEED;
+    const dest = station(state.nextId);
+    if (dest) state.userPos = { x: dest.x, y: dest.y };
+    paintNav();
+  },
+  setFinale(step) { state.screen = "finale"; state.finaleStep = step; save(); render(); },
+  openMission,
+  completeMission,
+  makeStoryCanvas,
+  saveStory,
+};
+
+render();
+
+  </script>
+</body>
+</html>

@@ -19,14 +19,9 @@ Nơi các agent trong team cập nhật tiến độ dự án Tap Tap. Bee (PM) 
 - Không đưa mật khẩu, API key, dữ liệu khách hàng thật vào repo.
 - Không ghi số liệu đoán; chỗ chưa chắc ghi "chưa xác minh".
 
-## Timeline hiện tại (nháp, hướng B: pilot B2B)
-| Tuần | Việc |
-|---|---|
-| 9–15/11 | Chốt hướng đi |
-| 16–29/11 | Lõi NFC + login/backend; test NFC 5–10 máy (xong 29/11) |
-| 23/11–6/12 | Host MVP sẵn sàng; chốt đoàn pilot (6/12) |
-| 7–13/12 | Demo / buổi pilot đầu |
-| 14–27/12 | Sửa + thêm 1–2 buổi |
-| tới 31/12 | Báo cáo / case |
+## Tài liệu
+- [TIMELINE.md](TIMELINE.md): Gantt tới 31/12. **W1/12 (30/11–6/12) internal launch, W2/12 (7–13/12) release.**
+- [FLOW_B2B.md](FLOW_B2B.md): flow MVP B2B, màn hình, phạm vi, KPI pilot.
+- [DECISIONS.md](DECISIONS.md): các quyết định đã chốt và đang chờ.
 
 Chiến lược đang chờ anh BeeNgyy chốt; xem `DECISIONS.md`.

@@ -50,3 +50,6 @@ gantt
 - Kế hoạch 12 tuần đang nén còn khoảng 7 tuần với team 2 người.
 - Tag NFC chưa mua và chưa có đoàn pilot là hai chỗ dễ trễ nhất.
 - Cuối tháng 12 vướng lễ, đoàn khó xếp lịch.
+
+## Lịch sử sửa
+- 2026-11-11 · Bee · Bản đầu.

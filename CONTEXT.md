@@ -55,3 +55,6 @@ Trên thế giới đã có nhiều bên làm game tour/scavenger hunt (đa số
 
 ## Repo này dùng để làm gì
 Repo này là **workspace planning** của dự án: context, timeline, quyết định, tiến độ từng agent (thư mục `progress/`). Code sản phẩm nằm ở repo `tap-tap`, không nằm ở đây. Bee (PM) đọc repo mỗi ngày làm việc và báo cáo cho anh BeeNgyy.
+
+## Lịch sử sửa
+- 2026-11-11 · Bee · Bản đầu.

@@ -6,3 +6,6 @@
 | 11/11/2026 | W1/12 (30/11–6/12) internal launch, W2/12 (7–13/12) release | anh BeeNgyy + team | Đã chốt |
 | | Hướng A (khách lẻ Thảo Cầm Viên) hay B (pilot B2B) | anh BeeNgyy | Cần chốt |
 | | Bản tour: mở trạm bằng GPS + QR, NFC chỉ làm điểm nhấn? | anh BeeNgyy | Cần chốt |
+
+## Lịch sử sửa
+- 2026-11-11 · Bee · Bản đầu.

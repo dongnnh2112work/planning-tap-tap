@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#f7f5f0" />
+  <title>Summit Your Drawing v3 — Thảo Cầm Viên</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone-shell">
+    <div class="iphone-status" aria-hidden="true"><span>9:41</span><span class="batt"><span class="batt-icon"></span></span></div>
+    <div id="app">
+
+      <!-- Welcome -->
+      <section class="screen active" id="screen-welcome">
+        <div class="hero">
+          <div class="logo-mark">✏️</div>
+          <span class="badge">Demo v4 · Thảo Cầm Viên</span>
+          <h1 id="welcomeTitle" title="Giữ để reset">Summit Your Drawing</h1>
+          <p class="sub">Quét NFC, vẽ 1 phút, khám phá 15 chuồng trên bản đồ, rồi mở Tour Wrapped.</p>
+        </div>
+        <div class="welcome-preview" aria-hidden="true"><img src="assets/map-v3.webp" alt="" /></div>
+        <div class="spacer"></div>
+        <div class="bottom-actions">
+          <p class="nfc-caption">Demo giả lập NFC · lần đầu mở chuồng Capybara</p>
+          <button class="btn btn-accent" id="btnScanNfc" type="button">Quét NFC</button>
+          <button class="btn-text-reset" id="btnReset" type="button">Reset demo</button>
+        </div>
+      </section>
+
+      <!-- NFC pick -->
+      <section class="screen" id="screen-nfc">
+        <div class="screen-head">
+          <h1>Chọn chuồng</h1>
+          <p class="sub">Giả lập quét NFC — 15 chuồng có thẻ.</p>
+        </div>
+        <div class="animal-grid" id="animalGrid"></div>
+        <div class="spacer"></div>
+        <div class="bottom-actions">
+          <button class="btn btn-ghost" id="btnNfcBack" type="button">Quay lại</button>
+        </div>
+      </section>
+
+      <!-- Drawing -->
+      <section class="screen" id="screen-draw">
+        <div class="draw-top">
+          <div class="draw-title" id="drawAnimalName">Đang vẽ…</div>
+          <div class="timer" id="timer">1:00</div>
+        </div>
+        <div class="canvas-wrap" id="canvasWrap">
+          <img id="guideLayer" alt="" draggable="false" />
+          <canvas id="drawCanvas"></canvas>
+        </div>
+        <div class="draw-bar">
+          <div class="draw-tools">
+            <button class="tool active" id="btnBrush" type="button" title="Bút" aria-label="Bút">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+            </button>
+            <button class="tool" id="btnEraser" type="button" title="Tẩy nét" aria-label="Tẩy">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 21h10"/><path d="M5.5 13.5l6-6a2.1 2.1 0 013 0l4 4a2.1 2.1 0 010 3L12 21H5.5v-7.5z"/></svg>
+            </button>
+            <button class="tool" id="btnUndo" type="button" title="Hoàn tác" aria-label="Undo">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 010 11H13"/></svg>
+            </button>
+            <label class="ios-toggle" title="Gợi ý nét">
+              <input type="checkbox" id="chkGuide" />
+              <span class="ios-switch"></span>
+              <span class="ios-toggle-label">Gợi ý</span>
+            </label>
+          </div>
+          <button class="btn btn-accent btn-xong" id="btnSubmit" type="button">Xong</button>
+        </div>
+      </section>
+
+      <!-- Login -->
+      <section class="screen" id="screen-login">
+        <div class="screen-head">
+          <span class="badge">Giả lập · không OAuth</span>
+          <h1>Lưu bức vẽ</h1>
+          <p class="sub">Lần đầu cần đăng nhập để lưu lên bản đồ.</p>
+        </div>
+        <div class="google-mock">
+          <div class="mock-label">Đăng nhập giả lập</div>
+          <button class="btn btn-google" id="btnGoogleLogin" type="button"><span class="g-icon"></span> Đăng nhập với Google</button>
+        </div>
+        <div class="spacer"></div>
+      </section>
+
+      <!-- Map -->
+      <section class="screen" id="screen-map">
+        <div class="nav-banner" id="navBanner"><div id="navBannerText">Đi thẳng</div><div class="sub" id="navBannerSub"></div></div>
+        <div class="map-header">
+          <h1>Bản đồ của bạn</h1>
+          <p class="stats" id="mapStats">0 / 15</p>
+        </div>
+        <div class="hint-chip" id="suggestChip">
+          <div class="hint-ico">📍</div>
+          <div class="hint-body">
+            <div class="hint-label">Gợi ý gần nhất</div>
+            <div class="hint-text" id="suggestHint">Chạm ô chuồng để chỉ đường</div>
+          </div>
+        </div>
+        <div class="map-viewport" id="mapViewport">
+          <div class="map-world" id="mapWorld">
+            <img id="mapBg" class="map-bg" alt="Bản đồ TCV" />
+            <svg id="mapPaths" class="map-overlay" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+            <svg id="mapRoute" class="map-overlay" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+            <div id="mapCells"></div>
+            <div id="mapLandmarks"></div>
+          </div>
+        </div>
+        <div class="map-zoom-bar">
+          <button type="button" id="btnZoomOut" class="zoom-btn" aria-label="Thu nhỏ">−</button>
+          <button type="button" id="btnZoomIn" class="zoom-btn" aria-label="Phóng to">+</button>
+          <button type="button" id="btnZoomReset" class="zoom-btn" aria-label="Thu gọn toàn cảnh" title="Thu gọn">⌂</button>
+        </div>
+        <p class="osm-credit">Lối đi tham khảo OSM · © OpenStreetMap contributors</p>
+        <div class="bottom-actions">
+          <button class="btn btn-accent" id="btnAnimalList" type="button">Danh sách con vật</button>
+          <button class="btn btn-ghost" id="btnWrapped" type="button" disabled>Hoàn thành hành trình</button>
+        </div>
+      </section>
+
+      <!-- Directions sheet (Google Maps style) -->
+      <div class="sheet hidden" id="dirSheet">
+        <div class="sheet-card gmaps compact">
+          <div class="gmaps-head">
+            <h2 id="dirTitle">Chỉ đường</h2>
+            <button type="button" class="sheet-x" id="btnDirClose" aria-label="Đóng">✕</button>
+          </div>
+          <p class="gmaps-line" id="dirMetaLine"><span id="dirMins">— phút</span> · <span id="dirDist">— m</span></p>
+          <button type="button" class="gmaps-steps-toggle" id="btnStepsToggle">Chi tiết chỉ đường ▾</button>
+          <ol class="gmaps-steps collapsed" id="dirSteps"></ol>
+          <div class="gmaps-actions">
+            <button class="btn btn-gmaps" id="btnDirStart" type="button">Bắt đầu</button>
+            <button class="btn btn-ghost btn-dir-nfc" id="btnDirGo" type="button">Quét NFC</button>
+          </div>
+          <p class="sub hidden" id="dirSub"></p>
+          <div class="dir-preview hidden" id="dirPreview"></div>
+          <span class="hidden" id="dirMeta"></span>
+        </div>
+      </div>
+      <!-- Animal list sheet (directions, not drawing) -->
+      <div class="sheet sheet-dim hidden" id="animalSheet">
+        <div class="sheet-card animal-list-card">
+          <div class="gmaps-head">
+            <h2>Danh sách con vật</h2>
+            <button type="button" class="sheet-x" id="btnAnimalListClose" aria-label="Đóng">✕</button>
+          </div>
+          <p class="sub animal-list-sub">Chọn con vật để xem chỉ đường. Vẽ khi đã tới nơi và quét NFC.</p>
+          <div class="animal-list" id="animalList"></div>
+        </div>
+      </div>
+      <div id="userLoc" class="user-loc hidden"><div class="cone"></div></div>
+      <div id="destPin" class="dest-pin hidden">📍</div>
+
+      <!-- Wrapped: Strava -->
+      <section class="screen" id="screen-strava">
+        <div class="screen-head">
+          <h1>Quãng đường</h1>
+          <p class="sub">Hành trình check-in kiểu Strava</p>
+        </div>
+        <div class="strava-stats" id="stravaStats"></div>
+        <div class="map-stage strava-stage" id="stravaStage">
+          <img id="stravaMapBg" class="map-bg" alt="" />
+          <canvas id="stravaCanvas" class="strava-canvas"></canvas>
+          <div class="strava-live" id="stravaLive">
+            <div><span id="stravaClock">09:00</span></div>
+            <div><span id="stravaKmLive">0,00 km</span></div>
+            <div><span id="stravaStepsLive">0 bước</span></div>
+          </div>
+        </div>
+        <div class="bottom-actions">
+          <button class="btn btn-ghost" id="btnStravaReplay" type="button">Phát lại</button>
+          <button class="btn btn-accent" id="btnStravaNext" type="button">Xem bộ sưu tập tranh</button>
+        </div>
+      </section>
+
+      <!-- Wrapped: Grid showcase -->
+      <section class="screen" id="screen-grid">
+        <div class="screen-head">
+          <h1>Bộ sưu tập</h1>
+          <p class="sub">Từng nét vẽ của bạn</p>
+        </div>
+        <div class="showcase-stage" id="showcaseStage">
+          <img id="showcaseImg" alt="" />
+        </div>
+        <div class="grid-3" id="grid3"></div>
+        <div class="bottom-actions">
+          <button class="btn btn-accent" id="btnGridNext" type="button">Nhận danh hiệu</button>
+        </div>
+      </section>
+
+      <!-- Titles -->
+      <section class="screen" id="screen-titles">
+        <canvas id="fwCanvas" aria-hidden="true"></canvas>
+        <div class="title-ceremony">
+          <div class="wreath-wrap">
+            <svg class="laurel" viewBox="0 0 200 200" aria-hidden="true">
+              <defs>
+                <filter id="pencilGrain" x="-8%" y="-8%" width="116%" height="116%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                  <feTurbulence type="fractalNoise" baseFrequency="1.25" numOctaves="2" seed="3" result="n"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0.18  0 0 0 0 0.42  0 0 0 0 0.14  0 0 0 0.55 0" in="n" result="g"/>
+                  <!-- clip grain to leaf/stem alpha only — no grey square behind -->
+                  <feComposite in="g" in2="SourceGraphic" operator="in" result="clipped"/>
+                  <feBlend in="SourceGraphic" in2="clipped" mode="multiply"/>
+                </filter>
+              </defs>
+              <g class="leaf-ring" transform="translate(100 100) scale(1) translate(-100 -100)">
+                <path d="M52 38 Q22 100 50 162" fill="none" stroke="#4a8f3a" stroke-width="3.6" stroke-linecap="round"/>
+                <g transform="translate(21 98) rotate(-58)">
+                  <ellipse cx="0" cy="0" rx="13" ry="7" fill="#5faa45"/>
+                  <path d="M-6.5,-2 L6.5,-0.5" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                  <path d="M-6.5,2 L6.5,0.5" fill="none" stroke="#2f6b28" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/>
+                </g>
+                <g transform="translate(15 120) rotate(-40)">
+                  <ellipse cx="0" cy="0" rx="12" ry="6.5" fill="#7bc45a"/>
+                  <path d="M-6,-2 L6,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(19 76) rotate(-72)">
+                  <ellipse cx="0" cy="0" rx="12" ry="6.5" fill="#3f8a32"/>
+                  <path d="M-6,-2 L6,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(17 140) rotate(-26)">
+                  <ellipse cx="0" cy="0" rx="11.5" ry="6" fill="#6bb84c"/>
+                  <path d="M-5.5,-2 L5.5,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(27 56) rotate(-88)">
+                  <ellipse cx="0" cy="0" rx="11.5" ry="6" fill="#8fd46a"/>
+                  <path d="M-5.5,-2 L5.5,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(29 156) rotate(-10)">
+                  <ellipse cx="0" cy="0" rx="11" ry="5.8" fill="#4e9a3c"/>
+                  <path d="M-5,-1.5 L5,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(41 42) rotate(-105)">
+                  <ellipse cx="0" cy="0" rx="11" ry="5.8" fill="#71c055"/>
+                  <path d="M-5,-1.5 L5,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <path d="M148 38 Q178 100 150 162" fill="none" stroke="#4a8f3a" stroke-width="3.6" stroke-linecap="round"/>
+                <g transform="translate(179 98) rotate(58)">
+                  <ellipse cx="0" cy="0" rx="13" ry="7" fill="#5faa45"/>
+                  <path d="M-6.5,-2 L6.5,-0.5" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                  <path d="M-6.5,2 L6.5,0.5" fill="none" stroke="#2f6b28" stroke-width="0.9" stroke-linecap="round" opacity="0.45"/>
+                </g>
+                <g transform="translate(185 120) rotate(40)">
+                  <ellipse cx="0" cy="0" rx="12" ry="6.5" fill="#7bc45a"/>
+                  <path d="M-6,-2 L6,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(181 76) rotate(72)">
+                  <ellipse cx="0" cy="0" rx="12" ry="6.5" fill="#3f8a32"/>
+                  <path d="M-6,-2 L6,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(183 140) rotate(26)">
+                  <ellipse cx="0" cy="0" rx="11.5" ry="6" fill="#6bb84c"/>
+                  <path d="M-5.5,-2 L5.5,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(173 56) rotate(88)">
+                  <ellipse cx="0" cy="0" rx="11.5" ry="6" fill="#8fd46a"/>
+                  <path d="M-5.5,-2 L5.5,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(171 156) rotate(10)">
+                  <ellipse cx="0" cy="0" rx="11" ry="5.8" fill="#4e9a3c"/>
+                  <path d="M-5,-1.5 L5,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+                <g transform="translate(159 42) rotate(105)">
+                  <ellipse cx="0" cy="0" rx="11" ry="5.8" fill="#71c055"/>
+                  <path d="M-5,-1.5 L5,0" fill="none" stroke="#2f6b28" stroke-width="1.0" stroke-linecap="round" opacity="0.55"/>
+                </g>
+              </g>
+            </svg>
+            <h1 class="title-main" id="mainTitleName">Danh hiệu</h1>
+          </div>
+          <p class="title-sub" id="mainTitleDesc"></p>
+          <div class="titles-extra" id="titlesList" hidden></div>
+        </div>
+        <div class="bottom-actions">
+          <button class="btn btn-accent" id="btnTitlesNext" type="button">Tải ảnh / video</button>
+        </div>
+      </section>
+
+      <!-- Export / Preview -->
+      <section class="screen" id="screen-export">
+        <div class="screen-head">
+          <h1>Xem trước & tải</h1>
+          <p class="sub">Chọn bố cục và loại file, xem trước rồi tải về</p>
+        </div>
+        <div class="seg-row">
+          <button type="button" class="seg active" data-layout="grid" id="layoutGrid">Lưới</button>
+          <button type="button" class="seg" data-layout="map" id="layoutMap">Trên map</button>
+        </div>
+        <div class="seg-row">
+          <button type="button" class="seg active" data-media="image" id="mediaImage">Ảnh</button>
+          <button type="button" class="seg" data-media="video" id="mediaVideo">Video</button>
+        </div>
+        <div class="preview-frame" id="previewFrame">
+          <img id="previewImg" alt="Xem trước ảnh" />
+          <video id="previewVideo" class="hidden" playsinline muted loop></video>
+          <canvas id="previewAnim" class="hidden"></canvas>
+        </div>
+        <p class="preview-hint" id="previewHint">Đang tạo xem trước…</p>
+        <div class="bottom-actions">
+          <button class="btn btn-accent" id="btnDownload" type="button">Tải về</button>
+          <button class="btn btn-ghost hidden" id="btnShare" type="button">Chia sẻ</button>
+          <button class="btn btn-ghost" id="btnExportBack" type="button">Về bản đồ</button>
+        </div>
+        <!-- legacy ids kept for tests -->
+        <button class="hidden" id="btnExportPng" type="button"></button>
+        <button class="hidden" id="btnExportVideo" type="button"></button>
+        <button class="hidden" id="btnSharePng" type="button"></button>
+        <button class="hidden" id="btnShareVideo" type="button"></button>
+        <canvas id="exportCanvas" width="720" height="1280"></canvas>
+      </section>
+
+      <!-- Video export progress -->
+      <div class="sheet hidden" id="videoProgress">
+        <div class="sheet-card">
+          <h2>Đang tạo video…</h2>
+          <p class="sub" id="videoProgressText">Chuẩn bị khung hình</p>
+          <div class="progress-track"><div class="progress-bar" id="videoProgressBar"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="map-data.js"></script>
+  <script src="path-graph.js"></script>
+  <script src="config.js"></script>
+  <script src="guide-data.js"></script>
+  <script src="app.js"></script>
+  <script>
+  (function(){
+    function fit(){
+      var root=document.documentElement;
+      if (window.innerWidth < 520) { root.style.setProperty('--fit', 1); return; }
+      var w=402+22, h=874+22, m=32;
+      var k=Math.min(1,(window.innerWidth-m)/w,(window.innerHeight-m)/h);
+      root.style.setProperty('--fit', k.toFixed(4));
+    }
+    window.addEventListener('resize', fit); fit();
+  })();
+  </script>
+</body>
+</html>

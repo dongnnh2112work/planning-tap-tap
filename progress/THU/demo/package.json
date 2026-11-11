@@ -1,0 +1,10 @@
+{
+  "name": "summit-your-drawing-demo",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Summit Your Drawing demo v2 — Thảo Cầm Viên NFC check-in drawing",
+  "scripts": {
+    "test:exports": "node scripts/test-v2-exports.mjs",
+    "test:screenshots": "node scripts/screenshot-flow.mjs"
+  }
+}

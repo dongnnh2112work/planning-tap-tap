@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="#bbbbbb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- flamingo-ish: long neck + one leg -->
+  <ellipse cx="110" cy="130" rx="36" ry="22"/>
+  <path d="M85 120 Q60 80 70 45 Q75 30 95 35 Q110 42 100 55 Q85 70 95 110"/>
+  <path d="M70 40 L48 32"/>
+  <circle cx="78" cy="38" r="2.5"/>
+  <path d="M110 150 L108 185"/>
+  <path d="M108 185 L95 190 M108 185 L118 192"/>
+  <path d="M130 125 Q160 100 170 90"/>
+</svg>

@@ -2,6 +2,16 @@
 
 Làm cho: Thư (Art & Social)
 
+## 2026-11-12 (W2/11)
+- Đã xong: Chốt idea Summit Your Drawing
+- Đang làm (to do W2/11):
+  - Chốt concept → art direction (trắng đen hay mảng màu tươi sáng)
+  - Cách thêm content (educate / easter egg) vào sản phẩm
+  - List ra các trang → demo art direction trên vài trang
+- Kế tiếp: sẽ bổ sung sau
+- Vướng / rủi ro: sẽ bổ sung sau
+- Cần anh BeeNgyy quyết: sẽ bổ sung sau
+
 ## 2026-11-11
 - Đã xong: Ý tưởng B2C tại Thảo Cầm Viên, pitching ngày 10/11/2026 — overview, vấn đề của Thảo Cầm Viên, idea Summit Your Drawing (tổng quan, flow, art direction) và bản demo web v4. Nội dung nằm ở các mục bên dưới; demo ở [THU/demo/](THU/demo/).
 - Đang làm: sẽ bổ sung sau

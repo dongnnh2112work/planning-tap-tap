@@ -2,6 +2,18 @@
 
 Làm cho: Nhi (Art & Social)
 
+## 2026-11-13
+- Đã xong: bảng rủi ro NFC tại Thảo Cầm Viên, bảng rủi ro social khi launch, và đề xuất phương án launch Threads cho Submit Your Drawing.
+  - [Rủi ro NFC](NHI/research/2026-11-13_rui-ro-nfc-tcv.md)
+  - [Rủi ro social khi launch](NHI/research/2026-11-13_rui-ro-social-launch.md)
+  - [Đề xuất launch Threads](NHI/research/2026-11-13_de-xuat-launch-threads.md)
+
+**Next step**
+- Team chốt phương án launch trước ngày 15/11, rồi tạo account và định hướng kênh theo phương án đó.
+- Nhi dựa trên đặc điểm của account để build profile trên social.
+- Nhi soạn kịch bản trả lời các câu hỏi có thể gặp phải.
+- Nhi lên các tuyến nội dung cho kênh.
+
 ## 2026-11-11
 - Đã xong: Idea 2 — Choo Zoo (tổng quan, 5 nhiệm vụ core, 12 điểm break, user flow, art direction), prototype web v2, video demo v2.1, và social plan. Nội dung nằm ở các mục bên dưới; prototype ở [NHI/demo/](NHI/demo/); video ở [NHI/video/](NHI/video/).
 - Đang làm: sẽ bổ sung sau
